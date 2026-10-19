@@ -62,6 +62,10 @@
 }
 
 *{box-sizing:border-box}
+/* O atributo hidden deve SEMPRE ocultar o elemento.
+   Sem esta regra, qualquer CSS que defina "display" (ex.: .cookie{display:flex})
+   sobrepõe o hidden do navegador e o elemento continua visível. */
+[hidden]{display:none!important}
 html{font-size:100%;scroll-behavior:smooth}
 body{
   margin:0;

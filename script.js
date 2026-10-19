@@ -936,9 +936,23 @@ $('fContato').addEventListener('submit', function (e) {
 });
 
 /* ---------- Cookies ---------- */
-$('cookie').hidden = !!S.cfg.cookie;
-$('cookieOk').addEventListener('click', function () { S.cfg.cookie = 1; salva(); $('cookie').hidden = true; toast('Preferência salva.'); });
-$('cookieNao').addEventListener('click', function () { S.cfg.cookie = 1; salva(); $('cookie').hidden = true; toast('Preferência salva. Apenas o essencial será usado.'); });
+/* Chave dedicada: a escolha do aviso de cookies persiste mesmo se o usuário
+   apagar os dados financeiros (chave resoluta.v2). */
+var KEY_COOKIE = 'resoluta.cookie';
+function cookieDecidido() {
+  try { if (localStorage.getItem(KEY_COOKIE) === '1') return true; } catch (e) { /* armazenamento indisponível */ }
+  return !!S.cfg.cookie;
+}
+function fechaCookie(aviso) {
+  S.cfg.cookie = 1;
+  salva();
+  try { localStorage.setItem(KEY_COOKIE, '1'); } catch (e) { /* armazenamento indisponível */ }
+  $('cookie').hidden = true;
+  toast(aviso);
+}
+$('cookie').hidden = cookieDecidido();
+$('cookieOk').addEventListener('click', function () { fechaCookie('Preferência salva.'); });
+$('cookieNao').addEventListener('click', function () { fechaCookie('Preferência salva. Apenas o essencial será usado.'); });
 
 /* ---------- Datalists ---------- */
 function atualizaDatalists() {
@@ -963,6 +977,6 @@ function atualizaTudo() {
 aplicaCfg();
 atualizaDatalists();
 rota();
-if (!S.cfg.cookie) $('cookie').hidden = false;
+$('cookie').hidden = cookieDecidido();
 
 })();
