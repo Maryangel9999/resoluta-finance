@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Resoluta AGI — Resoluta Finance</title>
+  <meta name="description" content="Entenda seus números. Tome melhores decisões. Resoluta Finance - ferramentas de gestão para microempreendedores." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Ir para o conteúdo</a>
+
+  <header class="site-header" role="banner">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">R<span class="logo-dot">•</span></div>
+      <div class="brand-text">
+        <strong>Resoluta AGI</strong>
+        <small>Resoluta Finance</small>
+      </div>
+    </div>
+
+    <button id="navToggle" aria-expanded="false" aria-controls="navMain" class="nav-toggle">Menu</button>
+    <nav id="navMain" class="nav" aria-label="Navegação principal">
+      <ul>
+        <li><a href="#home">Início</a></li>
+        <li><a href="#institucional">Institucional</a></li>
+        <li><a href="#calculadora">Calculadora</a></li>
+        <li><a href="#produtos">Produtos</a></li>
+        <li><a href="#lancamentos">Lançamentos</a></li>
+        <li><a href="#painel">Painel</a></li>
+        <li><a href="#aprenda">Aprenda</a></li>
+        <li><a href="#config">Configurações</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a href="https://www.instagram.com/resoluta.agi" target="_blank" rel="noopener" class="icon-link" aria-label="Instagram @resoluta.agi">@resoluta.agi</a>
+      <button id="prefsBtn" class="btn small">Preferências</button>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <section id="home" class="hero" aria-labelledby="homeTitle">
+      <h1 id="homeTitle">Entenda seus números. Tome melhores decisões.</h1>
+      <p class="lead">Resoluta Finance ajuda microempreendedores a organizar finanças, formar preços e planejar o crescimento de forma prática e acessível.</p>
+      <div class="cta">
+        <a href="#calculadora" class="btn primary">Calcular preço</a>
+        <a href="#painel" class="btn outline">Organizar minhas finanças</a>
+      </div>
+      <div class="preview">
+        <article><h3>Calculadora</h3><p>Forme preços com clareza.</p></article>
+        <article><h3>Painel</h3><p>Saldo, fluxo e relatórios.</p></article>
+        <article><h3>Aprenda</h3><p>Aulas práticas e exercícios.</p></article>
+      </div>
+    </section>
+
+    <section id="institucional" class="section" aria-labelledby="instTitle">
+      <h2 id="instTitle">Sobre a Resoluta AGI</h2>
+      <p>Muitos microempreendedores começam seus negócios com dedicação e boas ideias, mas enfrentam dificuldades para calcular preços, controlar despesas, organizar fluxo de caixa e entender se obtêm lucro. Pensando nisso nasceu a proposta deste projeto (Resoluta AGI), com a solução Resoluta Finance para facilitar a gestão e a precificação.</p>
+      <p><strong>Local:</strong> São Luís – MA • <strong>Instagram:</strong> <a href="https://www.instagram.com/resoluta.agi" target="_blank">@resoluta.agi</a> • <strong>DDD:</strong> (98)</p>
+      <div class="plan-5w2h" aria-hidden="false">
+        <h3>Planejamento (resumo)</h3>
+        <ul>
+          <li><strong>What:</strong> Site de gestão financeira para microempreendedores.</li>
+          <li><strong>Why:</strong> Facilitar decisões com base em números.</li>
+          <li><strong>Where:</strong> Site (navegador) — foco São Luís–MA.</li>
+          <li><strong>When:</strong> Etapas: planejamento → desenvolvimento → testes → publicação.</li>
+          <li><strong>Who:</strong> Equipe da Resoluta AGI com apoio técnico.</li>
+          <li><strong>How:</strong> Ferramentas: precificação, lançamentos, fluxo, relatórios e educação.</li>
+          <li><strong>How much:</strong> Estimativas de custo devem ser avaliadas sem inventar preços.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="calculadora" class="section" aria-labelledby="calcTitle">
+      <h2 id="calcTitle">Calculadora de Markup e Precificação</h2>
+      <form id="calcForm" class="card" novalidate>
+        <div class="field">
+          <label for="calcName">Nome do produto/serviço</label>
+          <input id="calcName" name="calcName" type="text" placeholder="Ex: Pão caseiro" />
+        </div>
+
+        <div class="field">
+          <label for="costUnit">Custo direto unitário (R$)</label>
+          <input id="costUnit" name="costUnit" type="number" step="0.01" min="0" required />
+        </div>
+
+        <div class="grid-2">
+          <div class="field">
+            <label for="percentVar">Despesas variáveis (%)</label>
+            <input id="percentVar" name="percentVar" type="number" step="0.01" min="0" value="10" />
+          </div>
+          <div class="field">
+            <label for="percentFix">Despesas fixas (%)</label>
+            <input id="percentFix" name="percentFix" type="number" step="0.01" min="0" value="15" />
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="field">
+            <label for="percentProfit">Margem de lucro desejada (%)</label>
+            <input id="percentProfit" name="percentProfit" type="number" step="0.01" min="0" value="20" />
+          </div>
+          <div class="field">
+            <label for="quantity">Quantidade vendida (un)</label>
+            <input id="quantity" name="quantity" type="number" step="1" min="1" value="1" />
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="field">
+            <label for="impostos">Impostos (%) <small>(opcional)</small></label>
+            <input id="impostos" name="impostos" type="number" step="0.01" min="0" value="0" />
+          </div>
+          <div class="field">
+            <label for="taxas">Taxas e comissões (%) <small>(opcional)</small></label>
+            <input id="taxas" name="taxas" type="number" step="0.01" min="0" value="0" />
+          </div>
+        </div>
+
+        <div class="actions">
+          <button id="calcBtn" type="button" class="btn primary">Calcular</button>
+          <button id="clearCalc" type="button" class="btn ghost">Limpar</button>
+        </div>
+
+        <div id="calcResult" class="result" aria-live="polite"></div>
+        <details>
+          <summary>Como o cálculo funciona</summary>
+          <p>Markup divisor = 1 − (despesas variáveis + despesas fixas + margem desejada [+ impostos + taxas quando informados]). Markup multiplicador = 1 ÷ divisor. Preço sugerido = custo direto ÷ divisor. Se o divisor for zero ou negativo, ajuste percentuais.</p>
+        </details>
+      </form>
+    </section>
+
+    <section id="produtos" class="section" aria-labelledby="prodTitle">
+      <h2 id="prodTitle">Produtos e Serviços</h2>
+      <div class="controls">
+        <button id="btnNewProduct" class="btn primary">Novo produto</button>
+        <button id="exportProducts" class="btn outline">Exportar CSV</button>
+      </div>
+      <div id="productsList" class="list" aria-live="polite"></div>
+    </section>
+
+    <section id="lancamentos" class="section" aria-labelledby="transTitle">
+      <h2 id="transTitle">Lançamentos financeiros</h2>
+      <div class="controls">
+        <button id="btnNewTransaction" class="btn primary">Novo lançamento</button>
+        <button id="exportTransactions" class="btn outline">Exportar CSV</button>
+      </div>
+      <div id="transactionsList" class="list" aria-live="polite"></div>
+    </section>
+
+    <section id="painel" class="section" aria-labelledby="dashTitle">
+      <h2 id="dashTitle">Painel financeiro</h2>
+      <div id="dashboard" class="grid-3" aria-live="polite">
+        <div class="indicator"><span class="num" id="saldoInicial">—</span><small>Saldo inicial</small></div>
+        <div class="indicator"><span class="num" id="receitas">—</span><small>Receitas recebidas</small></div>
+        <div class="indicator"><span class="num" id="despesas">—</span><small>Despesas pagas</small></div>
+        <div class="indicator"><span class="num" id="resultado">—</span><small>Resultado período</small></div>
+        <div class="indicator"><span class="num" id="contasPagar">—</span><small>Contas a pagar</small></div>
+        <div class="indicator"><span class="num" id="contasReceber">—</span><small>Contas a receber</small></div>
+      </div>
+
+      <div class="charts">
+        <div class="chart card" id="flowChart" aria-hidden="false">
+          <h3>Fluxo (últimos 30 dias)</h3>
+          <svg id="flowSvg" width="100%" height="120" role="img" aria-label="Gráfico de fluxo de caixa"></svg>
+        </div>
+        <div class="card">
+          <h3>Produtos cadastrados</h3>
+          <div id="panelProductsCount">—</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="aprenda" class="section" aria-labelledby="learnTitle">
+      <h2 id="learnTitle">Aprenda — módulos</h2>
+      <ol class="modules">
+        <li><strong>Fundamentos:</strong> organização financeira, faturamento vs lucro, separar finanças pessoais e empresariais.</li>
+        <li><strong>Custos e despesas:</strong> fixos vs variáveis; diretos vs indiretos.</li>
+        <li><strong>Precificação:</strong> markup, margem e erros comuns.</li>
+        <li><strong>Fluxo de caixa:</strong> registro, vencimentos e projeções.</li>
+        <li><strong>Planejamento:</strong> capital de giro, metas e cenários.</li>
+      </ol>
+    </section>
+
+    <section id="config" class="section" aria-labelledby="configTitle">
+      <h2 id="configTitle">Configurações</h2>
+      <form id="prefsForm" class="card" aria-label="Preferências">
+        <fieldset>
+          <legend>Aparência</legend>
+          <label><input type="radio" name="theme" value="light" checked> Tema claro</label>
+          <label><input type="radio" name="theme" value="dark"> Tema escuro</label>
+          <label><input type="checkbox" id="highContrast"> Alto contraste</label>
+          <label for="fontSize">Tamanho da fonte: <span id="fontSizeLabel">16</span>px</label>
+          <input id="fontSize" type="range" min="14" max="22" value="16" />
+        </fieldset>
+
+        <fieldset>
+          <legend>Preferências financeiras</legend>
+          <label for="saldoInicialInput">Saldo inicial (R$)</label>
+          <input id="saldoInicialInput" type="number" step="0.01" value="0" />
+        </fieldset>
+
+        <div class="actions">
+          <button id="savePrefs" type="button" class="btn primary">Salvar</button>
+          <button id="resetData" type="button" class="btn ghost">Limpar dados locais</button>
+        </div>
+      </form>
+    </section>
+
+    <section id="politicas" class="section" aria-labelledby="polTitle">
+      <h2 id="polTitle">Políticas e Termos (resumo)</h2>
+      <p>Política de Privacidade, Cookies e Termos de Uso devem ser revisados e adaptados antes da publicação. Este site mantém dados localmente no navegador (localStorage) neste build; para armazenamento entre dispositivos é necessário um back‑end seguro.</p>
+    </section>
+  </main>
+
+  <div id="cookieBanner" class="cookie-banner" role="dialog" aria-live="polite" aria-modal="true" hidden>
+    <p>Usamos cookies estritamente necessários e opcionais para melhorar a experiência. Personalize suas preferências.</p>
+    <div class="cookie-actions">
+      <button id="acceptAll" class="btn primary">Aceitar tudo</button>
+      <button id="rejectAll" class="btn ghost">Rejeitar não‑essenciais</button>
+      <button id="manageCookies" class="btn outline">Personalizar</button>
+    </div>
+  </div>
+
+  <!-- Modais -->
+  <div id="modal" class="modal" role="dialog" aria-hidden="true">
+    <div class="modal-content" role="document" aria-modal="true">
+      <button class="modal-close" aria-label="Fechar">×</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <footer class="site-footer" role="contentinfo">
+    <small>© Resoluta AGI — Resoluta Finance • São Luís – MA • Instagram: <a href="https://www.instagram.com/resoluta.agi" target="_blank">@resoluta.agi</a></small>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
