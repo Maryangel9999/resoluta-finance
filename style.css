@@ -1,330 +1,937 @@
 
-"use strict";
+/* =========================================
+   RESOLUTA AGI — IDENTIDADE VISUAL
+   Cores: bordô, dourado, branco e grafite
+========================================= */
 
-document.addEventListener("DOMContentLoaded", () => {
-  const byId = (id) => document.getElementById(id);
+:root {
+  --bordo: #681b32;
+  --bordo-escuro: #3b101f;
+  --bordo-claro: #8c3049;
+  --dourado: #d5ad60;
+  --dourado-claro: #f0d99f;
+  --fundo: #faf8f5;
+  --branco: #ffffff;
+  --texto: #29252a;
+  --texto-suave: #6f6870;
+  --borda: #e9e1e3;
+  --sombra: 0 12px 35px rgba(59, 16, 31, 0.09);
+  --raio: 16px;
+}
 
-  const form = byId("pricingForm");
-  const menuToggle = byId("menuToggle");
-  const navigation = byId("navigation");
-  const formMessage = byId("formMessage");
-  const saveMessage = byId("saveMessage");
-  const downloadButton = byId("downloadCsv");
-  const saveButton = byId("saveCalculation");
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  let lastCalculation = null;
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
 
-  const currency = (value) =>
-    new Intl.NumberFormat("pt-BR", {
-      style: "currency",
-      currency: "BRL"
-    }).format(Number.isFinite(value) ? value : 0);
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: var(--fundo);
+  color: var(--texto);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
 
-  const numberFormat = (value) =>
-    new Intl.NumberFormat("pt-BR", {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 4
-    }).format(value);
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
 
-  const readNumber = (id) => {
-    const element = byId(id);
-    if (!element || element.value.trim() === "") return null;
+a {
+  color: inherit;
+  text-decoration: none;
+}
 
-    const value = Number(element.value);
-    return Number.isFinite(value) ? value : null;
-  };
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
 
-  function setText(id, value) {
-    const element = byId(id);
-    if (element) element.textContent = value;
-  }
+button {
+  cursor: pointer;
+}
 
-  function validateInputs() {
-    const unitCost = readNumber("unitCost");
-    const variableExpenses = readNumber("variableExpenses");
-    const profitMargin = readNumber("profitMargin");
-    const quantity = readNumber("quantity");
-    const fixedExpenses = readNumber("fixedExpenses");
-    const desiredPrice = readNumber("desiredPrice");
+.container,
+.container-geral {
+  width: min(1160px, 90%);
+  margin-inline: auto;
+}
 
-    if (unitCost === null || unitCost < 0) {
-      return "Informe um custo unitário válido, igual ou superior a zero.";
-    }
+section {
+  padding: 85px 0;
+}
 
-    if (
-      variableExpenses === null ||
-      variableExpenses < 0 ||
-      variableExpenses >= 100
-    ) {
-      return "As despesas variáveis devem ser iguais ou superiores a zero e menores que 100%.";
-    }
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.2;
+  color: var(--bordo-escuro);
+}
 
-    if (
-      profitMargin === null ||
-      profitMargin < 0 ||
-      profitMargin >= 100
-    ) {
-      return "A margem desejada deve ser igual ou superior a zero e menor que 100%.";
-    }
+h1 {
+  font-size: clamp(2.3rem, 5vw, 4.4rem);
+  letter-spacing: -1.8px;
+}
 
-    if (
-      quantity === null ||
-      !Number.isInteger(quantity) ||
-      quantity < 1
-    ) {
-      return "Informe uma quantidade inteira de pelo menos uma unidade.";
-    }
+h2 {
+  font-size: clamp(1.9rem, 3.5vw, 3rem);
+  letter-spacing: -0.8px;
+}
 
-    if (fixedExpenses === null || fixedExpenses < 0) {
-      return "Informe um valor válido para as despesas fixas.";
-    }
+h3 {
+  font-size: 1.25rem;
+}
 
-    if (desiredPrice !== null && desiredPrice < 0) {
-      return "O preço de venda desejado não pode ser negativo.";
-    }
+p {
+  color: var(--texto-suave);
+}
 
-    if (variableExpenses + profitMargin >= 100) {
-      return "A soma das despesas variáveis e da margem precisa ser menor que 100%.";
-    }
+::selection {
+  background: var(--dourado);
+  color: var(--bordo-escuro);
+}
 
-    return null;
-  }
+/* CABEÇALHO E MENU */
+header,
+.header,
+.navbar,
+nav {
+  position: relative;
+  z-index: 10;
+}
 
-  function resetResults() {
-    lastCalculation = null;
+header,
+.header {
+  background: var(--branco);
+}
 
-    setText("suggestedPrice", currency(0));
-    setText("markupFactor", "—");
-    setText("totalRevenue", currency(0));
-    setText("totalCost", currency(0));
-    setText("totalVariable", currency(0));
-    setText("grossProfit", currency(0));
-    setText("fixedResult", currency(0));
-    setText("netProfit", currency(0));
-    setText(
-      "resultExplanation",
-      "Os resultados são estimativas e dependem dos dados informados."
+.navbar {
+  min-height: 82px;
+  padding: 14px 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+  background: var(--branco);
+  border-bottom: 1px solid var(--borda);
+}
+
+.logo,
+.logo img,
+.navbar img {
+  max-height: 65px;
+  width: auto;
+  object-fit: contain;
+}
+
+.navbar ul,
+nav ul {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  list-style: none;
+}
+
+.navbar a,
+nav a {
+  font-size: 0.94rem;
+  font-weight: 600;
+  transition: color 0.25s ease;
+}
+
+.navbar a:hover,
+nav a:hover {
+  color: var(--bordo-claro);
+}
+
+.menu-toggle {
+  display: none;
+  background: transparent;
+  border: 0;
+  color: var(--bordo);
+  font-size: 1.8rem;
+}
+
+/* BOTÕES */
+.btn,
+button.btn,
+.btn-primary,
+.btn-secundario,
+.btn-secondary,
+button[type="submit"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 48px;
+  padding: 12px 24px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  font-weight: 700;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.btn-primary,
+.btn,
+button[type="submit"] {
+  background: var(--bordo);
+  color: var(--branco);
+}
+
+.btn-primary:hover,
+.btn:hover,
+button[type="submit"]:hover {
+  background: var(--bordo-escuro);
+  color: var(--branco);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(104, 27, 50, 0.2);
+}
+
+.btn-secundario,
+.btn-secondary {
+  background: transparent;
+  color: var(--bordo);
+  border-color: var(--bordo);
+}
+
+.btn-secundario:hover,
+.btn-secondary:hover {
+  background: var(--bordo);
+  color: var(--branco);
+}
+
+/* DESTAQUE PRINCIPAL */
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 100px 5%;
+  background:
+    radial-gradient(
+      circle at 85% 20%,
+      rgba(213, 173, 96, 0.2),
+      transparent 30%
+    ),
+    linear-gradient(125deg, #3b101f 0%, #681b32 58%, #87334a 100%);
+  color: var(--branco);
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 370px;
+  height: 370px;
+  right: -100px;
+  bottom: -190px;
+  border: 1px solid rgba(240, 217, 159, 0.35);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 35px rgba(240, 217, 159, 0.04),
+    0 0 0 70px rgba(240, 217, 159, 0.04);
+}
+
+.hero .container,
+.hero .container-geral {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: 55px;
+}
+
+.hero h1,
+.hero h2,
+.hero h3,
+.hero p {
+  color: var(--branco);
+}
+
+.hero h1 span,
+.hero .destaque {
+  color: var(--dourado-claro);
+}
+
+.hero p {
+  max-width: 620px;
+  margin: 24px 0 30px;
+  color: rgba(255, 255, 255, 0.83);
+  font-size: 1.08rem;
+}
+
+.hero img {
+  width: 100%;
+  max-height: 460px;
+  object-fit: cover;
+  border: 4px solid rgba(240, 217, 159, 0.65);
+  border-radius: 22px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+}
+
+.hero .btn-primary {
+  background: var(--dourado);
+  color: var(--bordo-escuro);
+}
+
+.hero .btn-primary:hover {
+  background: var(--dourado-claro);
+}
+
+/* TÍTULOS DE SEÇÃO */
+.section-title,
+.titulo-secao {
+  max-width: 760px;
+  margin: 0 auto 45px;
+  text-align: center;
+}
+
+.section-title h2,
+.titulo-secao h2 {
+  margin-bottom: 15px;
+}
+
+.section-title p,
+.titulo-secao p {
+  font-size: 1.03rem;
+}
+
+.section-title::after,
+.titulo-secao::after {
+  content: "";
+  display: block;
+  width: 65px;
+  height: 4px;
+  margin: 22px auto 0;
+  background: var(--dourado);
+  border-radius: 20px;
+}
+
+/* SOBRE A EMPRESA */
+.about,
+.sobre,
+#sobre {
+  background: var(--branco);
+}
+
+.about .container,
+.sobre .container,
+#sobre .container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 55px;
+}
+
+.about img,
+.sobre img,
+#sobre img {
+  width: 100%;
+  max-height: 440px;
+  object-fit: cover;
+  border-radius: var(--raio);
+  box-shadow: var(--sombra);
+}
+
+.about h2,
+.sobre h2,
+#sobre h2 {
+  margin-bottom: 20px;
+}
+
+.about p,
+.sobre p,
+#sobre p {
+  margin-bottom: 16px;
+}
+
+.about ul,
+.sobre ul,
+#sobre ul {
+  padding-left: 22px;
+  margin: 18px 0;
+}
+
+.about li,
+.sobre li,
+#sobre li {
+  margin-bottom: 9px;
+  color: var(--texto-suave);
+}
+
+/* SERVIÇOS E CARTÕES */
+.services,
+.servicos,
+#servicos {
+  background: var(--fundo);
+}
+
+.cards,
+.services-grid,
+.servicos-grid,
+.cards-container,
+.grid-servicos {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 25px;
+}
+
+.card,
+.service-card,
+.servico-card {
+  padding: 30px 25px;
+  background: var(--branco);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  box-shadow: 0 5px 18px rgba(59, 16, 31, 0.04);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.card:hover,
+.service-card:hover,
+.servico-card:hover {
+  transform: translateY(-7px);
+  border-color: var(--dourado);
+  box-shadow: var(--sombra);
+}
+
+.card h3,
+.service-card h3,
+.servico-card h3 {
+  margin: 14px 0 12px;
+}
+
+.card p,
+.service-card p,
+.servico-card p {
+  font-size: 0.96rem;
+}
+
+.card .icon,
+.service-card .icon,
+.servico-card .icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 55px;
+  height: 55px;
+  border-radius: 14px;
+  background: #f7edf0;
+  color: var(--bordo);
+  font-size: 1.7rem;
+}
+
+/* CALCULADORA FINANCEIRA */
+.calculator,
+.calculadora,
+#calculadora {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(104, 27, 50, 0.04),
+      rgba(213, 173, 96, 0.12)
     );
+}
 
-    const netResult = document.querySelector(".result-net");
-    if (netResult) netResult.classList.remove("negative");
+.calculator .container,
+.calculadora .container,
+#calculadora .container {
+  max-width: 1000px;
+}
 
-    downloadButton.disabled = true;
-    saveButton.disabled = true;
+.calculator-box,
+.calculadora-box,
+.calculator-container,
+.calculadora-container {
+  padding: clamp(22px, 4vw, 42px);
+  background: var(--branco);
+  border: 1px solid var(--borda);
+  border-top: 5px solid var(--dourado);
+  border-radius: 20px;
+  box-shadow: var(--sombra);
+}
+
+.calculator-box h3,
+.calculadora-box h3,
+.calculator-container h3,
+.calculadora-container h3 {
+  margin-bottom: 12px;
+}
+
+form {
+  width: 100%;
+}
+
+.form-grid,
+.calculator-grid,
+.calculadora-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.form-group,
+.input-group,
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 17px;
+}
+
+label {
+  color: var(--texto);
+  font-size: 0.94rem;
+  font-weight: 700;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  min-height: 47px;
+  padding: 12px 14px;
+  color: var(--texto);
+  background: var(--branco);
+  border: 1px solid #dcd3d7;
+  border-radius: 8px;
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--bordo-claro);
+  box-shadow: 0 0 0 3px rgba(104, 27, 50, 0.1);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #a29aa0;
+}
+
+small,
+.help-text,
+.texto-ajuda {
+  color: var(--texto-suave);
+  font-size: 0.82rem;
+}
+
+.resultados,
+.results,
+.resultados-calculadora {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+  margin-top: 28px;
+}
+
+.resultado,
+.result-card {
+  padding: 20px;
+  background: #fbf7f3;
+  border: 1px solid var(--borda);
+  border-radius: 12px;
+}
+
+.resultado span,
+.result-card span {
+  display: block;
+  color: var(--texto-suave);
+  font-size: 0.88rem;
+}
+
+.resultado strong,
+.result-card strong {
+  display: block;
+  margin-top: 6px;
+  color: var(--bordo);
+  font-size: 1.45rem;
+  overflow-wrap: anywhere;
+}
+
+.resultado.destaque,
+.result-card.destaque {
+  background: var(--bordo);
+  border-color: var(--bordo);
+}
+
+.resultado.destaque span,
+.resultado.destaque strong,
+.result-card.destaque span,
+.result-card.destaque strong {
+  color: var(--branco);
+}
+
+.resultado-lucro,
+.lucro {
+  color: #217346;
+}
+
+.prejuizo,
+.resultado-negativo {
+  color: #b42318;
+}
+
+.mensagem-resultado,
+#mensagem-resultado {
+  margin-top: 18px;
+  padding: 14px 16px;
+  background: #f8f0e0;
+  border-left: 4px solid var(--dourado);
+  border-radius: 6px;
+}
+
+/* EQUIPE */
+.team,
+.equipe,
+#equipe {
+  background: var(--branco);
+}
+
+.team-grid,
+.equipe-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 25px;
+}
+
+.team-card,
+.equipe-card {
+  overflow: hidden;
+  background: var(--branco);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra);
+}
+
+.team-card img,
+.equipe-card img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+}
+
+.team-card .content,
+.equipe-card .content {
+  padding: 22px;
+}
+
+/* CONTATO */
+.contact,
+.contato,
+#contato {
+  background: var(--bordo-escuro);
+  color: var(--branco);
+}
+
+.contact h2,
+.contact h3,
+.contact p,
+.contato h2,
+.contato h3,
+.contato p,
+#contato h2,
+#contato h3,
+#contato p {
+  color: var(--branco);
+}
+
+.contact .section-title::after,
+.contato .section-title::after {
+  background: var(--dourado);
+}
+
+.contact-grid,
+.contato-grid {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.contact-info,
+.contato-info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contact-info a,
+.contato-info a {
+  color: var(--dourado-claro);
+  overflow-wrap: anywhere;
+}
+
+.contact form,
+.contato form {
+  padding: 28px;
+  background: var(--branco);
+  border-radius: var(--raio);
+}
+
+.contact form label,
+.contato form label {
+  color: var(--texto);
+}
+
+.contact form button,
+.contato form button {
+  width: 100%;
+}
+
+/* RODAPÉ */
+footer,
+.footer {
+  padding: 28px 5%;
+  background: #250b14;
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+}
+
+footer p,
+.footer p {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.9rem;
+}
+
+footer a,
+.footer a {
+  color: var(--dourado-claro);
+}
+
+footer a:hover,
+.footer a:hover {
+  text-decoration: underline;
+}
+
+/* ACESSIBILIDADE */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--dourado);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 12px;
+  z-index: 999;
+  padding: 12px;
+  background: var(--branco);
+  color: var(--bordo);
+}
+
+.skip-link:focus {
+  top: 12px;
+}
+
+/* ANIMAÇÕES */
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
   }
 
-  function calculate(event) {
-    if (event) event.preventDefault();
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-    formMessage.textContent = "";
-    saveMessage.textContent = "";
+.hero h1,
+.hero p,
+.hero .btn {
+  animation: aparecer 0.7s ease both;
+}
 
-    const error = validateInputs();
+.hero p {
+  animation-delay: 0.12s;
+}
 
-    if (error) {
-      formMessage.textContent = error;
-      return;
-    }
+.hero .btn {
+  animation-delay: 0.22s;
+}
 
-    const unitCost = readNumber("unitCost");
-    const variableRate = readNumber("variableExpenses") / 100;
-    const profitRate = readNumber("profitMargin") / 100;
-    const quantity = readNumber("quantity");
-    const fixedExpenses = readNumber("fixedExpenses");
-    const desiredPrice = readNumber("desiredPrice");
-    const productName =
-      byId("productName").value.trim() || "Produto ou serviço";
-
-    /*
-     * Markup divisor:
-     * 1 - despesas variáveis - margem de lucro desejada.
-     *
-     * O preço sugerido considera a margem sobre o faturamento,
-     * mas não inclui rateio das despesas fixas por unidade.
-     */
-    const markupDivisor = 1 - variableRate - profitRate;
-    const suggestedUnitPrice = unitCost / markupDivisor;
-
-    const selectedUnitPrice =
-      desiredPrice !== null && desiredPrice > 0
-        ? desiredPrice
-        : suggestedUnitPrice;
-
-    const totalRevenue = selectedUnitPrice * quantity;
-    const totalCost = unitCost * quantity;
-    const totalVariable = totalRevenue * variableRate;
-    const grossProfit = totalRevenue - totalCost - totalVariable;
-    const netProfit = grossProfit - fixedExpenses;
-    const markupFactor = unitCost > 0
-      ? suggestedUnitPrice / unitCost
-      : null;
-
-    lastCalculation = {
-      date: new Date().toISOString(),
-      productName,
-      unitCost,
-      variableRate: variableRate * 100,
-      profitRate: profitRate * 100,
-      quantity,
-      fixedExpenses,
-      suggestedUnitPrice,
-      selectedUnitPrice,
-      totalRevenue,
-      totalCost,
-      totalVariable,
-      grossProfit,
-      netProfit,
-      markupFactor
-    };
-
-    renderResults(lastCalculation);
+/* TABLETS */
+@media (max-width: 900px) {
+  section {
+    padding: 65px 0;
   }
 
-  function renderResults(data) {
-    setText("suggestedPrice", currency(data.suggestedUnitPrice));
-    setText(
-      "markupFactor",
-      data.markupFactor === null
-        ? "Não calculável (custo zero)"
-        : `${numberFormat(data.markupFactor)}x`
-    );
-    setText("totalRevenue", currency(data.totalRevenue));
-    setText("totalCost", currency(data.totalCost));
-    setText("totalVariable", currency(data.totalVariable));
-    setText("grossProfit", currency(data.grossProfit));
-    setText("fixedResult", currency(data.fixedExpenses));
-    setText("netProfit", currency(data.netProfit));
-
-    const netResult = document.querySelector(".result-net");
-    if (netResult) {
-      netResult.classList.toggle("negative", data.netProfit < 0);
-    }
-
-    let explanation =
-      `Estimativa para ${data.quantity} unidade(s) de "${data.productName}". ` +
-      `O cálculo usa despesas variáveis de ${numberFormat(data.variableRate)}% ` +
-      `e margem desejada de ${numberFormat(data.profitRate)}%.`;
-
-    if (
-      data.selectedUnitPrice !== data.suggestedUnitPrice
-    ) {
-      explanation +=
-        ` O preço existente informado foi ${currency(data.selectedUnitPrice)}.`;
-    } else {
-      explanation +=
-        " O preço sugerido não inclui rateio das despesas fixas por unidade.";
-    }
-
-    if (data.netProfit < 0) {
-      explanation += " Atenção: o resultado estimado é negativo.";
-    }
-
-    setText("resultExplanation", explanation);
-
-    downloadButton.disabled = false;
-    saveButton.disabled = false;
+  .hero {
+    padding: 75px 5%;
   }
 
-  function csvEscape(value) {
-    const text = String(value ?? "");
-    return `"${text.replace(/"/g, '""')}"`;
+  .hero .container,
+  .hero .container-geral,
+  .about .container,
+  .sobre .container,
+  #sobre .container,
+  .contact-grid,
+  .contato-grid {
+    grid-template-columns: 1fr;
+    gap: 35px;
   }
 
-  function downloadCsv() {
-    if (!lastCalculation) return;
-
-    const data = lastCalculation;
-    const rows = [
-      ["Campo", "Valor"],
-      ["Produto ou serviço", data.productName],
-      ["Data do cálculo", data.date],
-      ["Custo unitário (R$)", data.unitCost],
-      ["Despesas variáveis (%)", data.variableRate],
-      ["Margem desejada (%)", data.profitRate],
-      ["Quantidade", data.quantity],
-      ["Despesas fixas (R$)", data.fixedExpenses],
-      ["Preço sugerido por unidade (R$)", data.suggestedUnitPrice],
-      ["Preço analisado por unidade (R$)", data.selectedUnitPrice],
-      ["Valor total das vendas (R$)", data.totalRevenue],
-      ["Custo total dos produtos (R$)", data.totalCost],
-      ["Despesas variáveis (R$)", data.totalVariable],
-      ["Lucro bruto estimado (R$)", data.grossProfit],
-      ["Lucro líquido estimado (R$)", data.netProfit],
-      ["Markup multiplicador", data.markupFactor ?? "Não calculável"]
-    ];
-
-    const csvContent =
-      "\uFEFF" +
-      rows.map((row) => row.map(csvEscape).join(";")).join("\r\n");
-
-    const blob = new Blob([csvContent], {
-      type: "text/csv;charset=utf-8;"
-    });
-
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "resoluta-finance-calculo.csv";
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-    URL.revokeObjectURL(url);
+  .hero img {
+    max-height: 380px;
   }
 
-  function saveCalculation() {
-    if (!lastCalculation) return;
-
-    try {
-      const key = "resolutaFinanceCalculations";
-      const existing = JSON.parse(localStorage.getItem(key) || "[]");
-
-      if (!Array.isArray(existing)) {
-        throw new Error("Formato de dados inválido.");
-      }
-
-      existing.push(lastCalculation);
-      localStorage.setItem(key, JSON.stringify(existing));
-
-      saveMessage.textContent =
-        "Cálculo salvo neste navegador. Ele não é enviado para um servidor.";
-    } catch (error) {
-      saveMessage.textContent =
-        "Não foi possível salvar. Verifique as configurações de armazenamento do navegador.";
-    }
+  .cards,
+  .services-grid,
+  .servicos-grid,
+  .cards-container,
+  .grid-servicos,
+  .team-grid,
+  .equipe-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  form.addEventListener("submit", calculate);
+  .navbar ul,
+  nav ul {
+    gap: 15px;
+  }
+}
 
-  form.addEventListener("reset", () => {
-    window.setTimeout(() => {
-      formMessage.textContent = "";
-      saveMessage.textContent = "";
-      resetResults();
-    }, 0);
-  });
+/* CELULARES */
+@media (max-width: 600px) {
+  section {
+    padding: 52px 0;
+  }
 
-  downloadButton.addEventListener("click", downloadCsv);
-  saveButton.addEventListener("click", saveCalculation);
+  .container,
+  .container-geral {
+    width: 91%;
+  }
 
-  menuToggle.addEventListener("click", () => {
-    const isOpen = navigation.classList.toggle("open");
-    menuToggle.setAttribute("aria-expanded", String(isOpen));
-    menuToggle.setAttribute(
-      "aria-label",
-      isOpen ? "Fechar menu" : "Abrir menu"
-    );
-    menuToggle.textContent = isOpen ? "✕" : "☰";
-  });
+  .navbar {
+    min-height: 70px;
+    padding: 12px 5%;
+    flex-wrap: wrap;
+  }
 
-  navigation.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => {
-      navigation.classList.remove("open");
-      menuToggle.setAttribute("aria-expanded", "false");
-      menuToggle.setAttribute("aria-label", "Abrir menu");
-      menuToggle.textContent = "☰";
-    });
-  });
+  .logo img,
+  .navbar img {
+    max-height: 50px;
+  }
 
-  setText("currentYear", new Date().getFullYear());
-  resetResults();
-});
+  .menu-toggle {
+    display: block;
+  }
+
+  .navbar ul,
+  nav ul {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .navbar li,
+  nav li {
+    padding: 10px 0;
+    border-top: 1px solid var(--borda);
+  }
+
+  .hero {
+    padding: 60px 5%;
+  }
+
+  .hero h1 {
+    font-size: 2.45rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .hero img {
+    max-height: 300px;
+  }
+
+  .cards,
+  .services-grid,
+  .servicos-grid,
+  .cards-container,
+  .grid-servicos,
+  .team-grid,
+  .equipe-grid,
+  .form-grid,
+  .calculator-grid,
+  .calculadora-grid,
+  .resultados,
+  .results,
+  .resultados-calculadora {
+    grid-template-columns: 1fr;
+  }
+
+  .card,
+  .service-card,
+  .servico-card {
+    padding: 24px 20px;
+  }
+
+  .calculator-box,
+  .calculadora-box,
+  .calculator-container,
+  .calculadora-container {
+    padding: 20px 16px;
+  }
+
+  .resultado strong,
+  .result-card strong {
+    font-size: 1.3rem;
+  }
+
+  .contact form,
+  .contato form {
+    padding: 22px 17px;
+  }
+
+  .btn,
+  .btn-primary,
+  .btn-secundario,
+  .btn-secondary {
+    width: 100%;
+  }
+}
+
+/* REDUZIR MOVIMENTO PARA QUEM PREFERIR */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
