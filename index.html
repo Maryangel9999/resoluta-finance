@@ -1,240 +1,229 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Resoluta AGI — Resoluta Finance</title>
-  <meta name="description" content="Entenda seus números. Tome melhores decisões. Resoluta Finance - ferramentas de gestão para microempreendedores." />
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Resoluta AGI — Administração, Gestão e Inovação. Soluções para microempresas e empreendedores.">
+  <meta name="theme-color" content="#24151c">
+  <title>Resoluta AGI | Administração, Gestão e Inovação</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
-  <a class="skip-link" href="#main">Ir para o conteúdo</a>
-
-  <header class="site-header" role="banner">
-    <div class="brand">
-      <div class="logo" aria-hidden="true">R<span class="logo-dot">•</span></div>
-      <div class="brand-text">
-        <strong>Resoluta AGI</strong>
-        <small>Resoluta Finance</small>
-      </div>
-    </div>
-
-    <button id="navToggle" aria-expanded="false" aria-controls="navMain" class="nav-toggle">Menu</button>
-    <nav id="navMain" class="nav" aria-label="Navegação principal">
-      <ul>
-        <li><a href="#home">Início</a></li>
-        <li><a href="#institucional">Institucional</a></li>
-        <li><a href="#calculadora">Calculadora</a></li>
-        <li><a href="#produtos">Produtos</a></li>
-        <li><a href="#lancamentos">Lançamentos</a></li>
-        <li><a href="#painel">Painel</a></li>
-        <li><a href="#aprenda">Aprenda</a></li>
-        <li><a href="#config">Configurações</a></li>
-      </ul>
+  <header class="header">
+    <a class="brand" href="#inicio" aria-label="Resoluta AGI - início">
+      <span class="brand-mark">R<span>A</span></span>
+      <span class="brand-name">RESOLUTA <strong>AGI</strong>
+        <small>ADMINISTRAÇÃO, GESTÃO E INOVAÇÃO</small>
+      </span>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false">☰</button>
+    <nav class="nav" id="navigation">
+      <a href="#inicio">Início</a>
+      <a href="#sobre">Quem somos</a>
+      <a href="#servicos">Soluções</a>
+      <a href="#calculadora">Calculadora</a>
+      <a href="#contato">Contato</a>
     </nav>
-
-    <div class="header-actions">
-      <a href="https://www.instagram.com/resoluta.agi" target="_blank" rel="noopener" class="icon-link" aria-label="Instagram @resoluta.agi">@resoluta.agi</a>
-      <button id="prefsBtn" class="btn small">Preferências</button>
-    </div>
   </header>
 
-  <main id="main" tabindex="-1">
-    <section id="home" class="hero" aria-labelledby="homeTitle">
-      <h1 id="homeTitle">Entenda seus números. Tome melhores decisões.</h1>
-      <p class="lead">Resoluta Finance ajuda microempreendedores a organizar finanças, formar preços e planejar o crescimento de forma prática e acessível.</p>
-      <div class="cta">
-        <a href="#calculadora" class="btn primary">Calcular preço</a>
-        <a href="#painel" class="btn outline">Organizar minhas finanças</a>
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-content">
+        <span class="eyebrow">ESTRATÉGIA • GESTÃO • INOVAÇÃO</span>
+        <h1>Transformamos desafios em <span>resultados.</span></h1>
+        <p>Ajudamos microempresas e empreendedores a organizar suas finanças, tomar decisões estratégicas e crescer com mais segurança.</p>
+        <div class="hero-actions">
+          <a class="button button-gold" href="#calculadora">Calcular meu preço</a>
+          <a class="button button-outline" href="#sobre">Conheça a Resoluta</a>
+        </div>
+        <div class="hero-note"><span class="status-dot"></span> Soluções pensadas para quem está começando.</div>
       </div>
-      <div class="preview">
-        <article><h3>Calculadora</h3><p>Forme preços com clareza.</p></article>
-        <article><h3>Painel</h3><p>Saldo, fluxo e relatórios.</p></article>
-        <article><h3>Aprenda</h3><p>Aulas práticas e exercícios.</p></article>
+      <div class="hero-image">
+        <img src="assets/logo-resoluta.png" alt="Logotipo da Resoluta AGI em dourado e bordô">
       </div>
     </section>
 
-    <section id="institucional" class="section" aria-labelledby="instTitle">
-      <h2 id="instTitle">Sobre a Resoluta AGI</h2>
-      <p>Muitos microempreendedores começam seus negócios com dedicação e boas ideias, mas enfrentam dificuldades para calcular preços, controlar despesas, organizar fluxo de caixa e entender se obtêm lucro. Pensando nisso nasceu a proposta deste projeto (Resoluta AGI), com a solução Resoluta Finance para facilitar a gestão e a precificação.</p>
-      <p><strong>Local:</strong> São Luís – MA • <strong>Instagram:</strong> <a href="https://www.instagram.com/resoluta.agi" target="_blank">@resoluta.agi</a> • <strong>DDD:</strong> (98)</p>
-      <div class="plan-5w2h" aria-hidden="false">
-        <h3>Planejamento (resumo)</h3>
-        <ul>
-          <li><strong>What:</strong> Site de gestão financeira para microempreendedores.</li>
-          <li><strong>Why:</strong> Facilitar decisões com base em números.</li>
-          <li><strong>Where:</strong> Site (navegador) — foco São Luís–MA.</li>
-          <li><strong>When:</strong> Etapas: planejamento → desenvolvimento → testes → publicação.</li>
-          <li><strong>Who:</strong> Equipe da Resoluta AGI com apoio técnico.</li>
-          <li><strong>How:</strong> Ferramentas: precificação, lançamentos, fluxo, relatórios e educação.</li>
-          <li><strong>How much:</strong> Estimativas de custo devem ser avaliadas sem inventar preços.</li>
-        </ul>
+    <section class="section about" id="sobre">
+      <div class="section-heading">
+        <span class="eyebrow">QUEM SOMOS</span>
+        <h2>Gestão inteligente, <span>conexão humana.</span></h2>
+        <p>Conheça a empresa e as pessoas por trás da Resoluta AGI.</p>
       </div>
-    </section>
-
-    <section id="calculadora" class="section" aria-labelledby="calcTitle">
-      <h2 id="calcTitle">Calculadora de Markup e Precificação</h2>
-      <form id="calcForm" class="card" novalidate>
-        <div class="field">
-          <label for="calcName">Nome do produto/serviço</label>
-          <input id="calcName" name="calcName" type="text" placeholder="Ex: Pão caseiro" />
-        </div>
-
-        <div class="field">
-          <label for="costUnit">Custo direto unitário (R$)</label>
-          <input id="costUnit" name="costUnit" type="number" step="0.01" min="0" required />
-        </div>
-
-        <div class="grid-2">
-          <div class="field">
-            <label for="percentVar">Despesas variáveis (%)</label>
-            <input id="percentVar" name="percentVar" type="number" step="0.01" min="0" value="10" />
-          </div>
-          <div class="field">
-            <label for="percentFix">Despesas fixas (%)</label>
-            <input id="percentFix" name="percentFix" type="number" step="0.01" min="0" value="15" />
+      <div class="about-grid">
+        <div class="about-copy">
+          <h3>Uma ideia que transforma a gestão</h3>
+          <p>A Resoluta AGI — Administração, Gestão e Inovação — é uma microempresa idealizada para apoiar pequenos negócios, especialmente empreendedores que estão iniciando sua jornada.</p>
+          <p>Nossa proposta é tornar a gestão empresarial mais acessível, oferecendo orientação prática, organização financeira e ferramentas que facilitam a tomada de decisões.</p>
+          <p>Com atuação em São Luís, Maranhão, valorizamos a inovação, a clareza e o desenvolvimento sustentável dos negócios.</p>
+          <div class="values">
+            <div><strong>01</strong><span>Organização</span></div>
+            <div><strong>02</strong><span>Inovação</span></div>
+            <div><strong>03</strong><span>Desenvolvimento</span></div>
           </div>
         </div>
-
-        <div class="grid-2">
-          <div class="field">
-            <label for="percentProfit">Margem de lucro desejada (%)</label>
-            <input id="percentProfit" name="percentProfit" type="number" step="0.01" min="0" value="20" />
-          </div>
-          <div class="field">
-            <label for="quantity">Quantidade vendida (un)</label>
-            <input id="quantity" name="quantity" type="number" step="1" min="1" value="1" />
-          </div>
-        </div>
-
-        <div class="grid-2">
-          <div class="field">
-            <label for="impostos">Impostos (%) <small>(opcional)</small></label>
-            <input id="impostos" name="impostos" type="number" step="0.01" min="0" value="0" />
-          </div>
-          <div class="field">
-            <label for="taxas">Taxas e comissões (%) <small>(opcional)</small></label>
-            <input id="taxas" name="taxas" type="number" step="0.01" min="0" value="0" />
-          </div>
-        </div>
-
-        <div class="actions">
-          <button id="calcBtn" type="button" class="btn primary">Calcular</button>
-          <button id="clearCalc" type="button" class="btn ghost">Limpar</button>
-        </div>
-
-        <div id="calcResult" class="result" aria-live="polite"></div>
-        <details>
-          <summary>Como o cálculo funciona</summary>
-          <p>Markup divisor = 1 − (despesas variáveis + despesas fixas + margem desejada [+ impostos + taxas quando informados]). Markup multiplicador = 1 ÷ divisor. Preço sugerido = custo direto ÷ divisor. Se o divisor for zero ou negativo, ajuste percentuais.</p>
-        </details>
-      </form>
-    </section>
-
-    <section id="produtos" class="section" aria-labelledby="prodTitle">
-      <h2 id="prodTitle">Produtos e Serviços</h2>
-      <div class="controls">
-        <button id="btnNewProduct" class="btn primary">Novo produto</button>
-        <button id="exportProducts" class="btn outline">Exportar CSV</button>
-      </div>
-      <div id="productsList" class="list" aria-live="polite"></div>
-    </section>
-
-    <section id="lancamentos" class="section" aria-labelledby="transTitle">
-      <h2 id="transTitle">Lançamentos financeiros</h2>
-      <div class="controls">
-        <button id="btnNewTransaction" class="btn primary">Novo lançamento</button>
-        <button id="exportTransactions" class="btn outline">Exportar CSV</button>
-      </div>
-      <div id="transactionsList" class="list" aria-live="polite"></div>
-    </section>
-
-    <section id="painel" class="section" aria-labelledby="dashTitle">
-      <h2 id="dashTitle">Painel financeiro</h2>
-      <div id="dashboard" class="grid-3" aria-live="polite">
-        <div class="indicator"><span class="num" id="saldoInicial">—</span><small>Saldo inicial</small></div>
-        <div class="indicator"><span class="num" id="receitas">—</span><small>Receitas recebidas</small></div>
-        <div class="indicator"><span class="num" id="despesas">—</span><small>Despesas pagas</small></div>
-        <div class="indicator"><span class="num" id="resultado">—</span><small>Resultado período</small></div>
-        <div class="indicator"><span class="num" id="contasPagar">—</span><small>Contas a pagar</small></div>
-        <div class="indicator"><span class="num" id="contasReceber">—</span><small>Contas a receber</small></div>
-      </div>
-
-      <div class="charts">
-        <div class="chart card" id="flowChart" aria-hidden="false">
-          <h3>Fluxo (últimos 30 dias)</h3>
-          <svg id="flowSvg" width="100%" height="120" role="img" aria-label="Gráfico de fluxo de caixa"></svg>
-        </div>
-        <div class="card">
-          <h3>Produtos cadastrados</h3>
-          <div id="panelProductsCount">—</div>
-        </div>
+        <figure class="team-photo">
+          <img src="assets/equipe-resoluta.jpg" alt="Equipe da Resoluta AGI reunida diante de um mural colorido">
+          <figcaption>Nosso time: pessoas unidas por ideias e soluções.</figcaption>
+        </figure>
       </div>
     </section>
 
-    <section id="aprenda" class="section" aria-labelledby="learnTitle">
-      <h2 id="learnTitle">Aprenda — módulos</h2>
-      <ol class="modules">
-        <li><strong>Fundamentos:</strong> organização financeira, faturamento vs lucro, separar finanças pessoais e empresariais.</li>
-        <li><strong>Custos e despesas:</strong> fixos vs variáveis; diretos vs indiretos.</li>
-        <li><strong>Precificação:</strong> markup, margem e erros comuns.</li>
-        <li><strong>Fluxo de caixa:</strong> registro, vencimentos e projeções.</li>
-        <li><strong>Planejamento:</strong> capital de giro, metas e cenários.</li>
-      </ol>
+    <section class="section services" id="servicos">
+      <div class="section-heading">
+        <span class="eyebrow">NOSSAS SOLUÇÕES</span>
+        <h2>Mais clareza para <span>seu negócio.</span></h2>
+        <p>Ferramentas e orientações para ajudar você a administrar melhor.</p>
+      </div>
+      <div class="service-grid">
+        <article class="service-card">
+          <span class="service-number">01</span>
+          <div class="service-icon">₨</div>
+          <h3>Gestão financeira</h3>
+          <p>Organize receitas, despesas e resultados para compreender a saúde financeira do seu negócio.</p>
+        </article>
+        <article class="service-card">
+          <span class="service-number">02</span>
+          <div class="service-icon">%</div>
+          <h3>Precificação inteligente</h3>
+          <p>Entenda custos, despesas e margens para construir preços mais conscientes.</p>
+        </article>
+        <article class="service-card">
+          <span class="service-number">03</span>
+          <div class="service-icon">↗</div>
+          <h3>Planejamento estratégico</h3>
+          <p>Defina objetivos, identifique prioridades e planeje os próximos passos.</p>
+        </article>
+        <article class="service-card">
+          <span class="service-number">04</span>
+          <div class="service-icon">✧</div>
+          <h3>Inovação para pequenos negócios</h3>
+          <p>Conheça soluções práticas para simplificar processos e apoiar seu desenvolvimento.</p>
+        </article>
+      </div>
     </section>
 
-    <section id="config" class="section" aria-labelledby="configTitle">
-      <h2 id="configTitle">Configurações</h2>
-      <form id="prefsForm" class="card" aria-label="Preferências">
-        <fieldset>
-          <legend>Aparência</legend>
-          <label><input type="radio" name="theme" value="light" checked> Tema claro</label>
-          <label><input type="radio" name="theme" value="dark"> Tema escuro</label>
-          <label><input type="checkbox" id="highContrast"> Alto contraste</label>
-          <label for="fontSize">Tamanho da fonte: <span id="fontSizeLabel">16</span>px</label>
-          <input id="fontSize" type="range" min="14" max="22" value="16" />
-        </fieldset>
+    <section class="section calculator-section" id="calculadora">
+      <div class="section-heading">
+        <span class="eyebrow">RESOLUTA FINANCE</span>
+        <h2>Descubra o preço ideal para <span>seu produto.</span></h2>
+        <p>Informe os valores e veja uma estimativa de custos, preço de venda e lucro.</p>
+      </div>
 
-        <fieldset>
-          <legend>Preferências financeiras</legend>
-          <label for="saldoInicialInput">Saldo inicial (R$)</label>
-          <input id="saldoInicialInput" type="number" step="0.01" value="0" />
-        </fieldset>
+      <div class="calculator">
+        <form id="pricingForm">
+          <div class="form-heading">
+            <span class="form-step">01 / PRECIFICAÇÃO</span>
+            <h3>Calculadora de markup</h3>
+            <p>Preencha os campos abaixo. Use valores em reais e percentuais.</p>
+          </div>
+          <div class="form-grid">
+            <label>Nome do produto ou serviço
+              <input id="productName" type="text" maxlength="100" placeholder="Ex.: Camiseta personalizada">
+            </label>
+            <label>Custo unitário (R$)
+              <input id="unitCost" type="number" min="0" step="0.01" placeholder="0,00" required>
+            </label>
+            <label>Despesas variáveis (%)
+              <input id="variableExpenses" type="number" min="0" max="99.99" step="0.01" value="10" required>
+            </label>
+            <label>Margem de lucro desejada (%)
+              <input id="profitMargin" type="number" min="0" max="99.99" step="0.01" value="20" required>
+            </label>
+            <label>Quantidade vendida
+              <input id="quantity" type="number" min="1" step="1" value="1" required>
+            </label>
+            <label>Despesas fixas do período (R$)
+              <input id="fixedExpenses" type="number" min="0" step="0.01" value="0" required>
+            </label>
+            <label>Preço de venda desejado (R$) <span class="optional">opcional</span>
+              <input id="desiredPrice" type="number" min="0" step="0.01" placeholder="Para analisar um preço existente">
+            </label>
+          </div>
+          <div class="form-actions">
+            <button class="button button-gold" type="submit">Calcular resultados</button>
+            <button class="button button-light" type="reset" id="resetForm">Limpar campos</button>
+          </div>
+          <p class="form-message" id="formMessage" role="status" aria-live="polite"></p>
+        </form>
 
-        <div class="actions">
-          <button id="savePrefs" type="button" class="btn primary">Salvar</button>
-          <button id="resetData" type="button" class="btn ghost">Limpar dados locais</button>
+        <div class="results" id="results" aria-live="polite">
+          <div class="results-top">
+            <span class="eyebrow">SEU RESUMO FINANCEIRO</span>
+            <h3>Seus resultados aparecerão aqui.</h3>
+            <p>Preencha a calculadora e selecione “Calcular resultados”.</p>
+          </div>
+          <div class="result-highlight">
+            <span>Preço de venda sugerido por unidade</span>
+            <strong id="suggestedPrice">R$ 0,00</strong>
+          </div>
+          <div class="result-list">
+            <div><span>Markup multiplicador</span><strong id="markupFactor">—</strong></div>
+            <div><span>Valor total das vendas</span><strong id="totalRevenue">R$ 0,00</strong></div>
+            <div><span>Custo total dos produtos</span><strong id="totalCost">R$ 0,00</strong></div>
+            <div><span>Despesas variáveis estimadas</span><strong id="totalVariable">R$ 0,00</strong></div>
+            <div><span>Lucro bruto estimado</span><strong id="grossProfit">R$ 0,00</strong></div>
+            <div><span>Despesas fixas</span><strong id="fixedResult">R$ 0,00</strong></div>
+            <div class="result-net"><span>Lucro líquido estimado</span><strong id="netProfit">R$ 0,00</strong></div>
+          </div>
+          <p class="result-explanation" id="resultExplanation">Os resultados são estimativas e dependem dos dados informados.</p>
+          <div class="result-actions">
+            <button class="button button-dark" type="button" id="downloadCsv" disabled>Exportar CSV</button>
+            <button class="button button-light" type="button" id="saveCalculation" disabled>Salvar neste navegador</button>
+          </div>
+          <p class="form-message" id="saveMessage" role="status" aria-live="polite"></p>
         </div>
-      </form>
+      </div>
+      <div class="learning-box">
+        <span class="learning-icon">i</span>
+        <div>
+          <h3>Aprenda a precificar</h3>
+          <p><strong>Markup</strong> é um índice usado para formar o preço de venda considerando custos e despesas percentuais e a margem desejada. Ele não substitui uma análise completa de impostos, taxas, concorrência e particularidades do negócio.</p>
+        </div>
+      </div>
     </section>
 
-    <section id="politicas" class="section" aria-labelledby="polTitle">
-      <h2 id="polTitle">Políticas e Termos (resumo)</h2>
-      <p>Política de Privacidade, Cookies e Termos de Uso devem ser revisados e adaptados antes da publicação. Este site mantém dados localmente no navegador (localStorage) neste build; para armazenamento entre dispositivos é necessário um back‑end seguro.</p>
+    <section class="section team-section">
+      <div class="team-banner">
+        <div>
+          <span class="eyebrow">PESSOAS QUE FAZEM ACONTECER</span>
+          <h2>Ideias diferentes.<br><span>Um propósito em comum.</span></h2>
+          <p>Acreditamos que a inovação começa com pessoas dispostas a construir soluções juntas.</p>
+          <a class="button button-gold" href="#contato">Fale com a Resoluta</a>
+        </div>
+        <img src="assets/equipe-resoluta.jpg" alt="Integrantes da equipe Resoluta AGI">
+      </div>
+    </section>
+
+    <section class="section contact-section" id="contato">
+      <div class="section-heading">
+        <span class="eyebrow">ENTRE EM CONTATO</span>
+        <h2>Vamos construir <span>novas possibilidades?</span></h2>
+        <p>Conheça nosso trabalho e acompanhe as novidades da Resoluta AGI.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <span>⌖</span><h3>Localização</h3><p>São Luís — Maranhão, Brasil</p>
+        </div>
+        <a class="contact-card" href="https://www.instagram.com/resoluta.agi/" target="_blank" rel="noopener noreferrer">
+          <span>◎</span><h3>Instagram</h3><p>@resoluta.agi</p>
+        </a>
+        <div class="contact-card">
+          <span>✧</span><h3>Nosso propósito</h3><p>Gestão acessível para pequenos negócios.</p>
+        </div>
+      </div>
     </section>
   </main>
 
-  <div id="cookieBanner" class="cookie-banner" role="dialog" aria-live="polite" aria-modal="true" hidden>
-    <p>Usamos cookies estritamente necessários e opcionais para melhorar a experiência. Personalize suas preferências.</p>
-    <div class="cookie-actions">
-      <button id="acceptAll" class="btn primary">Aceitar tudo</button>
-      <button id="rejectAll" class="btn ghost">Rejeitar não‑essenciais</button>
-      <button id="manageCookies" class="btn outline">Personalizar</button>
-    </div>
-  </div>
-
-  <!-- Modais -->
-  <div id="modal" class="modal" role="dialog" aria-hidden="true">
-    <div class="modal-content" role="document" aria-modal="true">
-      <button class="modal-close" aria-label="Fechar">×</button>
-      <div id="modalBody"></div>
-    </div>
-  </div>
-
-  <footer class="site-footer" role="contentinfo">
-    <small>© Resoluta AGI — Resoluta Finance • São Luís – MA • Instagram: <a href="https://www.instagram.com/resoluta.agi" target="_blank">@resoluta.agi</a></small>
+  <footer class="footer">
+    <a class="brand footer-brand" href="#inicio">
+      <span class="brand-mark">R<span>A</span></span>
+      <span class="brand-name">RESOLUTA <strong>AGI</strong><small>ADMINISTRAÇÃO, GESTÃO E INOVAÇÃO</small></span>
+    </a>
+    <p>Estratégia, organização e inovação para empreender melhor.</p>
+    <p class="copyright">© <span id="currentYear"></span> Resoluta AGI. Todos os direitos reservados.</p>
+    <p class="disclaimer">As estimativas da calculadora são educativas e não constituem aconselhamento contábil, tributário ou financeiro.</p>
   </footer>
-
-  <script src="script.js" defer></script>
 </body>
 </html>
