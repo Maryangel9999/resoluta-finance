@@ -1,330 +1,237 @@
+(function () {
+'use strict';
+var KEY = 'resoluta.v1';
+var $ = function (id) { return document.getElementById(id); };
+var S = load();
 
-"use strict";
+function load() {
+  var d = { ini: 0, lanc: [], prod: [], cfg: { tema: 'claro', contraste: 0, leitura: 0, anim: 1, fonte: 100, cookie: 0 } };
+  try {
+    var r = JSON.parse(localStorage.getItem(KEY));
+    if (r) { d.ini = r.ini || 0; d.lanc = r.lanc || []; d.prod = r.prod || []; Object.assign(d.cfg, r.cfg || {}); }
+  } catch (e) { /* armazenamento indisponível ou corrompido */ }
+  return d;
+}
+function save() {
+  try { localStorage.setItem(KEY, JSON.stringify(S)); return true; }
+  catch (e) { toast('Não foi possível salvar os dados neste navegador.'); return false; }
+}
+function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+function brl(n) { return Number(n || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }); }
+function dt(s) { return s ? s.split('-').reverse().join('/') : '—'; }
+function today() { var d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
+function toast(m) { var t = $('toast'); t.textContent = m; t.classList.add('show'); setTimeout(function () { t.classList.remove('show'); }, 3000); }
+function msg(id, text, ok) { var e = $(id); e.textContent = text; e.className = 'msg ' + (ok ? 'ok' : 'bad'); }
+function num(id) { var v = $(id).value; return v === '' ? NaN : parseFloat(v); }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const byId = (id) => document.getElementById(id);
-
-  const form = byId("pricingForm");
-  const menuToggle = byId("menuToggle");
-  const navigation = byId("navigation");
-  const formMessage = byId("formMessage");
-  const saveMessage = byId("saveMessage");
-  const downloadButton = byId("downloadCsv");
-  const saveButton = byId("saveCalculation");
-
-  let lastCalculation = null;
-
-  const currency = (value) =>
-    new Intl.NumberFormat("pt-BR", {
-      style: "currency",
-      currency: "BRL"
-    }).format(Number.isFinite(value) ? value : 0);
-
-  const numberFormat = (value) =>
-    new Intl.NumberFormat("pt-BR", {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 4
-    }).format(value);
-
-  const readNumber = (id) => {
-    const element = byId(id);
-    if (!element || element.value.trim() === "") return null;
-
-    const value = Number(element.value);
-    return Number.isFinite(value) ? value : null;
-  };
-
-  function setText(id, value) {
-    const element = byId(id);
-    if (element) element.textContent = value;
-  }
-
-  function validateInputs() {
-    const unitCost = readNumber("unitCost");
-    const variableExpenses = readNumber("variableExpenses");
-    const profitMargin = readNumber("profitMargin");
-    const quantity = readNumber("quantity");
-    const fixedExpenses = readNumber("fixedExpenses");
-    const desiredPrice = readNumber("desiredPrice");
-
-    if (unitCost === null || unitCost < 0) {
-      return "Informe um custo unitário válido, igual ou superior a zero.";
-    }
-
-    if (
-      variableExpenses === null ||
-      variableExpenses < 0 ||
-      variableExpenses >= 100
-    ) {
-      return "As despesas variáveis devem ser iguais ou superiores a zero e menores que 100%.";
-    }
-
-    if (
-      profitMargin === null ||
-      profitMargin < 0 ||
-      profitMargin >= 100
-    ) {
-      return "A margem desejada deve ser igual ou superior a zero e menor que 100%.";
-    }
-
-    if (
-      quantity === null ||
-      !Number.isInteger(quantity) ||
-      quantity < 1
-    ) {
-      return "Informe uma quantidade inteira de pelo menos uma unidade.";
-    }
-
-    if (fixedExpenses === null || fixedExpenses < 0) {
-      return "Informe um valor válido para as despesas fixas.";
-    }
-
-    if (desiredPrice !== null && desiredPrice < 0) {
-      return "O preço de venda desejado não pode ser negativo.";
-    }
-
-    if (variableExpenses + profitMargin >= 100) {
-      return "A soma das despesas variáveis e da margem precisa ser menor que 100%.";
-    }
-
-    return null;
-  }
-
-  function resetResults() {
-    lastCalculation = null;
-
-    setText("suggestedPrice", currency(0));
-    setText("markupFactor", "—");
-    setText("totalRevenue", currency(0));
-    setText("totalCost", currency(0));
-    setText("totalVariable", currency(0));
-    setText("grossProfit", currency(0));
-    setText("fixedResult", currency(0));
-    setText("netProfit", currency(0));
-    setText(
-      "resultExplanation",
-      "Os resultados são estimativas e dependem dos dados informados."
-    );
-
-    const netResult = document.querySelector(".result-net");
-    if (netResult) netResult.classList.remove("negative");
-
-    downloadButton.disabled = true;
-    saveButton.disabled = true;
-  }
-
-  function calculate(event) {
-    if (event) event.preventDefault();
-
-    formMessage.textContent = "";
-    saveMessage.textContent = "";
-
-    const error = validateInputs();
-
-    if (error) {
-      formMessage.textContent = error;
-      return;
-    }
-
-    const unitCost = readNumber("unitCost");
-    const variableRate = readNumber("variableExpenses") / 100;
-    const profitRate = readNumber("profitMargin") / 100;
-    const quantity = readNumber("quantity");
-    const fixedExpenses = readNumber("fixedExpenses");
-    const desiredPrice = readNumber("desiredPrice");
-    const productName =
-      byId("productName").value.trim() || "Produto ou serviço";
-
-    /*
-     * Markup divisor:
-     * 1 - despesas variáveis - margem de lucro desejada.
-     *
-     * O preço sugerido considera a margem sobre o faturamento,
-     * mas não inclui rateio das despesas fixas por unidade.
-     */
-    const markupDivisor = 1 - variableRate - profitRate;
-    const suggestedUnitPrice = unitCost / markupDivisor;
-
-    const selectedUnitPrice =
-      desiredPrice !== null && desiredPrice > 0
-        ? desiredPrice
-        : suggestedUnitPrice;
-
-    const totalRevenue = selectedUnitPrice * quantity;
-    const totalCost = unitCost * quantity;
-    const totalVariable = totalRevenue * variableRate;
-    const grossProfit = totalRevenue - totalCost - totalVariable;
-    const netProfit = grossProfit - fixedExpenses;
-    const markupFactor = unitCost > 0
-      ? suggestedUnitPrice / unitCost
-      : null;
-
-    lastCalculation = {
-      date: new Date().toISOString(),
-      productName,
-      unitCost,
-      variableRate: variableRate * 100,
-      profitRate: profitRate * 100,
-      quantity,
-      fixedExpenses,
-      suggestedUnitPrice,
-      selectedUnitPrice,
-      totalRevenue,
-      totalCost,
-      totalVariable,
-      grossProfit,
-      netProfit,
-      markupFactor
-    };
-
-    renderResults(lastCalculation);
-  }
-
-  function renderResults(data) {
-    setText("suggestedPrice", currency(data.suggestedUnitPrice));
-    setText(
-      "markupFactor",
-      data.markupFactor === null
-        ? "Não calculável (custo zero)"
-        : `${numberFormat(data.markupFactor)}x`
-    );
-    setText("totalRevenue", currency(data.totalRevenue));
-    setText("totalCost", currency(data.totalCost));
-    setText("totalVariable", currency(data.totalVariable));
-    setText("grossProfit", currency(data.grossProfit));
-    setText("fixedResult", currency(data.fixedExpenses));
-    setText("netProfit", currency(data.netProfit));
-
-    const netResult = document.querySelector(".result-net");
-    if (netResult) {
-      netResult.classList.toggle("negative", data.netProfit < 0);
-    }
-
-    let explanation =
-      `Estimativa para ${data.quantity} unidade(s) de "${data.productName}". ` +
-      `O cálculo usa despesas variáveis de ${numberFormat(data.variableRate)}% ` +
-      `e margem desejada de ${numberFormat(data.profitRate)}%.`;
-
-    if (
-      data.selectedUnitPrice !== data.suggestedUnitPrice
-    ) {
-      explanation +=
-        ` O preço existente informado foi ${currency(data.selectedUnitPrice)}.`;
-    } else {
-      explanation +=
-        " O preço sugerido não inclui rateio das despesas fixas por unidade.";
-    }
-
-    if (data.netProfit < 0) {
-      explanation += " Atenção: o resultado estimado é negativo.";
-    }
-
-    setText("resultExplanation", explanation);
-
-    downloadButton.disabled = false;
-    saveButton.disabled = false;
-  }
-
-  function csvEscape(value) {
-    const text = String(value ?? "");
-    return `"${text.replace(/"/g, '""')}"`;
-  }
-
-  function downloadCsv() {
-    if (!lastCalculation) return;
-
-    const data = lastCalculation;
-    const rows = [
-      ["Campo", "Valor"],
-      ["Produto ou serviço", data.productName],
-      ["Data do cálculo", data.date],
-      ["Custo unitário (R$)", data.unitCost],
-      ["Despesas variáveis (%)", data.variableRate],
-      ["Margem desejada (%)", data.profitRate],
-      ["Quantidade", data.quantity],
-      ["Despesas fixas (R$)", data.fixedExpenses],
-      ["Preço sugerido por unidade (R$)", data.suggestedUnitPrice],
-      ["Preço analisado por unidade (R$)", data.selectedUnitPrice],
-      ["Valor total das vendas (R$)", data.totalRevenue],
-      ["Custo total dos produtos (R$)", data.totalCost],
-      ["Despesas variáveis (R$)", data.totalVariable],
-      ["Lucro bruto estimado (R$)", data.grossProfit],
-      ["Lucro líquido estimado (R$)", data.netProfit],
-      ["Markup multiplicador", data.markupFactor ?? "Não calculável"]
-    ];
-
-    const csvContent =
-      "\uFEFF" +
-      rows.map((row) => row.map(csvEscape).join(";")).join("\r\n");
-
-    const blob = new Blob([csvContent], {
-      type: "text/csv;charset=utf-8;"
-    });
-
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "resoluta-finance-calculo.csv";
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-    URL.revokeObjectURL(url);
-  }
-
-  function saveCalculation() {
-    if (!lastCalculation) return;
-
-    try {
-      const key = "resolutaFinanceCalculations";
-      const existing = JSON.parse(localStorage.getItem(key) || "[]");
-
-      if (!Array.isArray(existing)) {
-        throw new Error("Formato de dados inválido.");
-      }
-
-      existing.push(lastCalculation);
-      localStorage.setItem(key, JSON.stringify(existing));
-
-      saveMessage.textContent =
-        "Cálculo salvo neste navegador. Ele não é enviado para um servidor.";
-    } catch (error) {
-      saveMessage.textContent =
-        "Não foi possível salvar. Verifique as configurações de armazenamento do navegador.";
-    }
-  }
-
-  form.addEventListener("submit", calculate);
-
-  form.addEventListener("reset", () => {
-    window.setTimeout(() => {
-      formMessage.textContent = "";
-      saveMessage.textContent = "";
-      resetResults();
-    }, 0);
+/* ---------- Navegação ---------- */
+var pages = ['inicio', 'sobre', 'painel', 'calculadora', 'produtos', 'lancamentos', 'aprenda', 'contato', 'config', 'privacidade', 'cookies', 'termos'];
+function route() {
+  var h = (location.hash || '#inicio').slice(1);
+  if (pages.indexOf(h) < 0) h = 'inicio';
+  pages.forEach(function (p) { $('p-' + p).hidden = p !== h; });
+  document.querySelectorAll('nav a').forEach(function (a) {
+    if (a.getAttribute('href') === '#' + h) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
   });
+  document.title = $('p-' + h).querySelector('h1').textContent + ' · Resoluta AGI';
+  $('nav').classList.remove('open'); $('menuBtn').setAttribute('aria-expanded', 'false');
+  window.scrollTo(0, 0); $('main').focus();
+  if (h === 'painel') renderPainel();
+  if (h === 'produtos') renderProd();
+  if (h === 'lancamentos') renderLanc();
+}
+window.addEventListener('hashchange', route);
+$('menuBtn').onclick = function () { var o = $('nav').classList.toggle('open'); this.setAttribute('aria-expanded', o); };
 
-  downloadButton.addEventListener("click", downloadCsv);
-  saveButton.addEventListener("click", saveCalculation);
+/* ---------- Lançamentos ---------- */
+function status(l) {
+  if (l.sit === 'realizado') return 'realizado';
+  return l.venc && l.venc < today() ? 'vencido' : 'pendente';
+}
+function statusTxt(l) {
+  var s = status(l);
+  if (s === 'realizado') return l.tipo === 'receita' ? 'Recebido' : 'Pago';
+  return s === 'vencido' ? 'Vencido' : 'Pendente (previsto)';
+}
+$('fLanc').onsubmit = function (e) {
+  e.preventDefault();
+  var f = { desc: $('lDesc').value.trim(), tipo: $('lTipo').value, cat: $('lCat').value.trim(), valor: num('lValor'), venc: $('lVenc').value, sit: $('lSit').value, pag: $('lPag').value, forma: $('lForma').value.trim(), obs: $('lObs').value.trim() };
+  if (!f.desc || !f.cat) return msg('lMsg', 'Preencha descrição e categoria.', false);
+  if (!(f.valor > 0)) return msg('lMsg', 'Informe um valor maior que zero.', false);
+  if (!f.venc) return msg('lMsg', 'Informe a data de vencimento.', false);
+  if (f.sit === 'realizado' && !f.pag) f.pag = today();
+  if (f.sit === 'pendente') f.pag = '';
+  var id = $('lId').value;
+  if (!id && S.lanc.some(function (l) { return l.desc === f.desc && l.valor === f.valor && l.venc === f.venc && l.tipo === f.tipo; }))
+    return msg('lMsg', 'Lançamento duplicado: já existe um igual (mesma descrição, valor, tipo e vencimento).', false);
+  if (id) { var i = S.lanc.findIndex(function (l) { return l.id === id; }); f.id = id; S.lanc[i] = f; }
+  else { f.id = uid(); f.criado = today(); S.lanc.push(f); }
+  if (save()) { msg('lMsg', 'Lançamento salvo com sucesso.', true); resetL(); renderLanc(); }
+};
+function resetL() { $('fLanc').reset(); $('lId').value = ''; }
+$('lCancel').onclick = function () { resetL(); msg('lMsg', '', true); };
+function filtrados() {
+  var q = $('lBusca').value.toLowerCase(), t = $('lFTipo').value, s = $('lFSit').value;
+  return S.lanc.filter(function (l) {
+    return (!q || (l.desc + ' ' + l.cat).toLowerCase().indexOf(q) >= 0) && (!t || l.tipo === t) && (!s || status(l) === s);
+  }).sort(function (a, b) { return a.venc < b.venc ? -1 : 1; });
+}
+function renderLanc() {
+  var L = filtrados();
+  $('lTb').innerHTML = L.map(function (l) {
+    return '<tr><td>' + dt(l.venc) + '</td><td>' + esc(l.desc) + '</td><td>' + (l.tipo === 'receita' ? 'Receita' : 'Despesa') + '</td><td>' + esc(l.cat) + '</td><td>' + brl(l.valor) + '</td><td>' + statusTxt(l) + '</td><td><button class="btn ghost" data-ed="' + l.id + '" aria-label="Editar ' + esc(l.desc) + '">Editar</button><button class="btn danger" data-del="' + l.id + '" aria-label="Excluir ' + esc(l.desc) + '">Excluir</button></td></tr>';
+  }).join('');
+  $('lVazio').hidden = L.length > 0;
+}
+$('lTb').onclick = function (e) {
+  var ed = e.target.dataset.ed, del = e.target.dataset.del;
+  if (ed) {
+    var l = S.lanc.find(function (x) { return x.id === ed; });
+    $('lId').value = l.id; $('lDesc').value = l.desc; $('lTipo').value = l.tipo; $('lCat').value = l.cat; $('lValor').value = l.valor; $('lVenc').value = l.venc; $('lSit').value = l.sit; $('lPag').value = l.pag; $('lForma').value = l.forma; $('lObs').value = l.obs;
+    $('lDesc').focus(); window.scrollTo(0, 0);
+  }
+  if (del && confirm('Excluir este lançamento definitivamente?')) {
+    S.lanc = S.lanc.filter(function (x) { return x.id !== del; });
+    if (save()) { renderLanc(); toast('Lançamento excluído.'); }
+  }
+};
+['lBusca', 'lFTipo', 'lFSit'].forEach(function (id) { $(id).oninput = renderLanc; });
+function download(name, text, type) {
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([text], { type: type }));
+  a.download = name; document.body.appendChild(a); a.click(); a.remove();
+}
+$('lCsv').onclick = function () {
+  var L = filtrados();
+  if (!L.length) return toast('Não há lançamentos para exportar.');
+  var q = function (v) { return '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"'; };
+  var rows = [['Vencimento', 'Descricao', 'Tipo', 'Categoria', 'Valor', 'Situacao', 'Pagamento/Recebimento', 'Forma', 'Observacoes']].concat(L.map(function (l) {
+    return [l.venc, l.desc, l.tipo, l.cat, l.valor.toFixed(2).replace('.', ','), statusTxt(l), l.pag, l.forma, l.obs];
+  }));
+  download('lancamentos.csv', '\ufeff' + rows.map(function (r) { return r.map(q).join(';'); }).join('\r\n'), 'text/csv;charset=utf-8');
+};
 
-  menuToggle.addEventListener("click", () => {
-    const isOpen = navigation.classList.toggle("open");
-    menuToggle.setAttribute("aria-expanded", String(isOpen));
-    menuToggle.setAttribute(
-      "aria-label",
-      isOpen ? "Fechar menu" : "Abrir menu"
-    );
-    menuToggle.textContent = isOpen ? "✕" : "☰";
+/* ---------- Painel ---------- */
+function renderPainel() {
+  $('saldoIni').value = S.ini;
+  var de = $('pDe').value, ate = $('pAte').value;
+  var inR = function (d) { return d && (!de || d >= de) && (!ate || d <= ate); };
+  var rec = 0, desp = 0, aRec = 0, aPag = 0;
+  S.lanc.forEach(function (l) {
+    if (l.sit === 'realizado') { if (inR(l.pag)) { if (l.tipo === 'receita') rec += l.valor; else desp += l.valor; } }
+    else if (inR(l.venc)) { if (l.tipo === 'receita') aRec += l.valor; else aPag += l.valor; }
   });
+  var real = S.ini + rec - desp, proj = real + aRec - aPag;
+  $('painelVazio').hidden = S.lanc.length > 0;
+  $('qtdProd').textContent = S.prod.length;
+  var k = [['Saldo inicial', S.ini], ['Receitas recebidas', rec], ['Despesas pagas', desp], ['Resultado do período (realizado)', rec - desp], ['Saldo realizado', real], ['A receber (previsto)', aRec], ['A pagar (previsto)', aPag], ['Saldo projetado', proj]];
+  $('kpis').innerHTML = k.map(function (x) { return '<article class="card"><h2>' + x[0] + '</h2><p class="v">' + brl(x[1]) + '</p></article>'; }).join('');
+  var bars = [['Recebido', rec, 0], ['Pago', desp, 0], ['A receber', aRec, 0], ['A pagar', aPag, 0]];
+  var max = Math.max.apply(null, bars.map(function (b) { return b[1]; }).concat([1]));
+  $('grafico').innerHTML = bars.map(function (b) { return '<div class="bar"><span>' + brl(b[1]) + '</span><i style="height:' + Math.round(b[1] / max * 130) + 'px"></i><span>' + b[0] + '</span></div>'; }).join('');
+  $('grafico').setAttribute('aria-label', 'Gráfico de barras: recebido, pago, a receber e a pagar');
+  $('graficoTxt').textContent = 'Descrição do gráfico: recebido ' + brl(rec) + '; pago ' + brl(desp) + '; a receber ' + brl(aRec) + '; a pagar ' + brl(aPag) + '.' + (proj < 0 ? ' Atenção: o saldo projetado é negativo, indicando possível falta de caixa.' : '');
+}
+$('saldoIni').onchange = function () { S.ini = parseFloat(this.value) || 0; save(); renderPainel(); };
+$('pDe').onchange = $('pAte').onchange = renderPainel;
+$('limpaPeriodo').onclick = function () { $('pDe').value = ''; $('pAte').value = ''; renderPainel(); };
 
-  navigation.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => {
-      navigation.classList.remove("open");
-      menuToggle.setAttribute("aria-expanded", "false");
-      menuToggle.setAttribute("aria-label", "Abrir menu");
-      menuToggle.textContent = "☰";
-    });
+/* ---------- Calculadora ---------- */
+var ultimo = null;
+function calc(e) {
+  e.preventDefault();
+  var nome = $('cNome').value.trim(), c = num('cCusto'), v = num('cVar'), fx = num('cFix'), lu = num('cLucro'), q = num('cQtd'), pp = num('cPreco');
+  ultimo = null; $('cSalva').disabled = true; $('cRes').innerHTML = '';
+  if (!nome) return msg('cMsg', 'Informe o nome do produto ou serviço.', false);
+  if ([c, v, fx, lu].some(isNaN) || c < 0 || v < 0 || fx < 0 || lu < 0) return msg('cMsg', 'Preencha custo, despesas variáveis, fixas e lucro com valores válidos (não negativos).', false);
+  if (v > 100 || fx > 100 || lu > 100) return msg('cMsg', 'Percentuais não podem passar de 100%.', false);
+  var div = 1 - (v + fx + lu) / 100;
+  if (div <= 0) return msg('cMsg', 'Cálculo bloqueado: a soma dos percentuais (' + (v + fx + lu).toFixed(2) + '%) é 100% ou mais, então o divisor fica ' + div.toFixed(2) + '. Reduza algum percentual.', false);
+  var mult = 1 / div, sug = c / div;
+  var cards = [['Markup divisor', div.toFixed(4)], ['Markup multiplicador', mult.toFixed(4)], ['Preço de venda sugerido', brl(sug)]];
+  if (!isNaN(pp) && pp > 0) {
+    cards.push(['Preço praticado', brl(pp)]);
+    if (!isNaN(q) && q > 0) {
+      var vendas = pp * q, custo = c * q, bruto = vendas - custo, dv = vendas * v / 100, df = vendas * fx / 100, liq = bruto - dv - df;
+      cards.push(['Quantidade vendida', q], ['Total das vendas', brl(vendas)], ['Custo dos itens vendidos', brl(custo)], ['Lucro bruto', brl(bruto)], ['Despesas variáveis (estimadas)', brl(dv)], ['Despesas fixas (estimadas)', brl(df)], ['Lucro líquido estimado', brl(liq)], ['Margem líquida resultante', (liq / vendas * 100).toFixed(2) + '%']);
+    } else cards.push(['Observação', 'Informe a quantidade vendida para ver lucro bruto e líquido estimado.']);
+  } else cards.push(['Observação', 'Informe o preço praticado e a quantidade para comparar com o resultado real.']);
+  $('cRes').innerHTML = cards.map(function (x) { return '<article class="card"><h2>' + x[0] + '</h2><p class="v">' + esc(x[1]) + '</p></article>'; }).join('');
+  ultimo = { nome: nome, custo: c, preco: Math.round(sug * 100) / 100 };
+  $('cSalva').disabled = false;
+  msg('cMsg', 'Cálculo realizado. Resultado é uma estimativa.', true);
+}
+$('fCalc').onsubmit = calc;
+$('cLimpa').onclick = function () { $('fCalc').reset(); $('cRes').innerHTML = ''; msg('cMsg', '', true); $('cSalva').disabled = true; ultimo = null; };
+$('cSalva').onclick = function () {
+  if (!ultimo) return;
+  S.prod.push({ id: uid(), nome: ultimo.nome, cat: '', desc: 'Criado pela calculadora', custo: ultimo.custo, preco: ultimo.preco, qtd: '', criado: today() });
+  if (save()) { toast('Produto salvo com preço sugerido.'); location.hash = '#produtos'; }
+};
+
+/* ---------- Produtos ---------- */
+$('fProd').onsubmit = function (e) {
+  e.preventDefault();
+  var p = { nome: $('prNome').value.trim(), cat: $('prCat').value.trim(), desc: $('prDesc').value.trim(), custo: num('prCusto'), preco: num('prPreco'), qtd: $('prQtd').value };
+  if (!p.nome) return msg('prMsg', 'Informe o nome.', false);
+  if (isNaN(p.custo) || isNaN(p.preco) || p.custo < 0 || p.preco < 0) return msg('prMsg', 'Informe custo e preço válidos.', false);
+  var id = $('prId').value;
+  if (id) { var i = S.prod.findIndex(function (x) { return x.id === id; }); p.id = id; p.criado = S.prod[i].criado; S.prod[i] = p; }
+  else { p.id = uid(); p.criado = today(); S.prod.push(p); }
+  if (save()) { msg('prMsg', 'Produto salvo com sucesso.', true); $('fProd').reset(); $('prId').value = ''; renderProd(); }
+};
+$('prCancel').onclick = function () { $('fProd').reset(); $('prId').value = ''; msg('prMsg', '', true); };
+function renderProd() {
+  $('prTb').innerHTML = S.prod.map(function (p) {
+    var m = p.preco > 0 ? ((p.preco - p.custo) / p.preco * 100).toFixed(1) + '%' : '—';
+    return '<tr><td>' + esc(p.nome) + '</td><td>' + esc(p.cat) + '</td><td>' + brl(p.custo) + '</td><td>' + brl(p.preco) + '</td><td>' + m + '</td><td>' + esc(p.qtd) + '</td><td>' + dt(p.criado) + '</td><td><button class="btn ghost" data-ed="' + p.id + '" aria-label="Editar ' + esc(p.nome) + '">Editar</button><button class="btn danger" data-del="' + p.id + '" aria-label="Excluir ' + esc(p.nome) + '">Excluir</button><button class="btn alt" data-calc="' + p.id + '" aria-label="Usar ' + esc(p.nome) + ' na calculadora">Calcular</button></td></tr>';
+  }).join('');
+  $('prVazio').hidden = S.prod.length > 0;
+}
+$('prTb').onclick = function (e) {
+  var d = e.target.dataset, p = S.prod.find(function (x) { return x.id === (d.ed || d.del || d.calc); });
+  if (!p) return;
+  if (d.ed) { $('prId').value = p.id; $('prNome').value = p.nome; $('prCat').value = p.cat; $('prDesc').value = p.desc; $('prCusto').value = p.custo; $('prPreco').value = p.preco; $('prQtd').value = p.qtd; $('prNome').focus(); window.scrollTo(0, 0); }
+  if (d.del && confirm('Excluir "' + p.nome + '" definitivamente?')) { S.prod = S.prod.filter(function (x) { return x.id !== p.id; }); if (save()) { renderProd(); toast('Produto excluído.'); } }
+  if (d.calc) { location.hash = '#calculadora'; $('cNome').value = p.nome; $('cCusto').value = p.custo; $('cPreco').value = p.preco; }
+};
+
+/* ---------- Configurações e acessibilidade ---------- */
+function aplicaCfg() {
+  var c = S.cfg, h = document.documentElement;
+  h.dataset.tema = c.tema; h.dataset.contraste = c.contraste ? '1' : '0'; h.dataset.leitura = c.leitura ? '1' : '0'; h.dataset.anim = c.anim ? '1' : '0';
+  h.style.fontSize = c.fonte + '%';
+  $('cfTema').value = c.tema; $('cfContraste').checked = !!c.contraste; $('cfLeitura').checked = !!c.leitura; $('cfAnim').checked = !c.anim;
+}
+$('cfTema').onchange = function () { S.cfg.tema = this.value; save(); aplicaCfg(); };
+$('cfContraste').onchange = function () { S.cfg.contraste = this.checked ? 1 : 0; save(); aplicaCfg(); };
+$('cfLeitura').onchange = function () { S.cfg.leitura = this.checked ? 1 : 0; save(); aplicaCfg(); };
+$('cfAnim').onchange = function () { S.cfg.anim = this.checked ? 0 : 1; save(); aplicaCfg(); };
+$('fMais').onclick = function () { S.cfg.fonte = Math.min(200, S.cfg.fonte + 10); save(); aplicaCfg(); };
+$('fMenos').onclick = function () { S.cfg.fonte = Math.max(80, S.cfg.fonte - 10); save(); aplicaCfg(); };
+var tts = 'speechSynthesis' in window;
+function voz(fn) { if (!tts) return msg('cfMsg', 'Seu navegador não suporta leitura em voz alta.', false); fn(); }
+$('lerBtn').onclick = function () {
+  voz(function () {
+    speechSynthesis.cancel();
+    var vis = pages.map(function (p) { return $('p-' + p); }).filter(function (s) { return !s.hidden; })[0];
+    var u = new SpeechSynthesisUtterance(vis.innerText); u.lang = 'pt-BR'; speechSynthesis.speak(u);
   });
+};
+$('pausaBtn').onclick = function () { voz(function () { speechSynthesis.speaking && !speechSynthesis.paused ? speechSynthesis.pause() : speechSynthesis.resume(); }); };
+$('paraBtn').onclick = function () { voz(function () { speechSynthesis.cancel(); }); };
+$('exportaTudo').onclick = function () { download('resoluta-dados.json', JSON.stringify(S, null, 2), 'application/json'); msg('cfMsg', 'Arquivo gerado.', true); };
+$('apagaTudo').onclick = function () {
+  if (!confirm('Apagar TODOS os dados deste navegador? Esta ação não pode ser desfeita.')) return;
+  try { localStorage.removeItem(KEY); } catch (e) { /* ignora */ }
+  S = load(); aplicaCfg(); msg('cfMsg', 'Dados apagados.', true);
+};
 
-  setText("currentYear", new Date().getFullYear());
-  resetResults();
-});
+/* ---------- Cookies ---------- */
+$('cookie').hidden = !!S.cfg.cookie;
+$('cookieOk').onclick = function () { S.cfg.cookie = 1; save(); $('cookie').hidden = true; };
+
+aplicaCfg();
+route();
+})();
