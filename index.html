@@ -102,6 +102,11 @@
   </div>
 
   <section class="band">
+    <h2>Planos e acesso</h2>
+    <div class="grid grid-3" id="planosResumoHome"></div>
+  </section>
+
+  <section class="band">
     <h2>Por que a Resoluta?</h2>
     <div class="grid grid-3">
       <div class="mini"><h3>Tecnologia simples</h3><p>Uma experiência direta, que funciona no computador e no celular, sem planilhas complicadas.</p></div>
@@ -125,9 +130,9 @@
   <h1>Sobre a Resoluta AGI</h1>
   <div class="two">
     <div>
-      <p class="lead">Muitos microempreendedores começam seus negócios com dedicação e boas ideias, mas enfrentam dificuldades para calcular preços de venda, controlar despesas, organizar o fluxo de caixa e compreender se estão realmente obtendo lucro.</p>
-      <p>Foi pensando nesse desafio que surgiu a proposta da <b>Resoluta AGI — Administração, Gestão e Inovação</b>, uma microempresa voltada a oferecer soluções de gestão para negócios que estão começando ou precisam se organizar melhor.</p>
-      <p>Sua solução financeira, a <b>Resoluta Finance</b>, reúne ferramentas de precificação, controle de receitas e despesas, fluxo de caixa, relatórios e educação financeira em uma experiência que busca tornar os números mais fáceis de compreender.</p>
+      <p class="lead">Muitos microempreendedores começam seus negócios com dedicação e boas ideias, mas enfrentam dificuldades para calcular preços de venda, controlar despesas, organizar o estoque e entender o que realmente está rendendo.</p>
+      <p>Foi pensando nesse desafio que surgiu a proposta da <b>Resoluta AGI — Administração, Gestão e Inovação</b>, uma microempresa voltada a oferecer soluções de gestão para negócios em crescimento.</p>
+      <p>Sua solução financeira, a <b>Resoluta Finance</b>, reúne ferramentas de precificação, controle de receitas e despesas, fluxo de caixa, relatórios e educação financeira em uma experiência simples e funcional.</p>
       <p>Nosso diferencial é unir tecnologia, simplicidade e orientação prática, ajudando o empreendedor a compreender os resultados do negócio e a tomar decisões mais estratégicas.</p>
       <p class="pitch">Resoluta AGI + Resoluta Finance: sua gestão mais clara, suas decisões mais estratégicas e seu negócio preparado para evoluir.</p>
     </div>
@@ -164,7 +169,7 @@
           <tr><th scope="row">When — Quando?</th><td>Durante as etapas de planejamento, desenvolvimento, testes, publicação e manutenção.</td></tr>
           <tr><th scope="row">Who — Quem?</th><td>Equipe do projeto Resoluta AGI, com apoio de desenvolvimento web e gestão financeira.</td></tr>
           <tr><th scope="row">How — Como?</th><td>Ferramentas de precificação, lançamentos, fluxo de caixa, relatórios, planejamento e conteúdos educativos.</td></tr>
-          <tr><th scope="row">How much — Quanto?</th><td>Custos a considerar: desenvolvimento, domínio, hospedagem, banco de dados, APIs, manutenção e serviços. Valores dependem de fornecedores e devem ser orçados antes da publicação.</td></tr>
+          <tr><th scope="row">How much — Quanto?</th><td>Custos a considerar: desenvolvimento, domínio, hospedagem, banco de dados, APIs, manutenção e serviços. Valores dependem do escopo e das integrações.</td></tr>
         </tbody>
       </table>
     </div>
@@ -206,6 +211,23 @@
   <div id="evoChart" class="chart" role="img" aria-label="Gráfico de evolução mensal de receitas e despesas"></div>
   <p id="evoTxt" class="note"></p>
 
+  <h2>Indicadores avançados</h2>
+  <div id="indicadoresAvancados" class="grid" aria-live="polite"></div>
+
+  <h2>Diagnóstico financeiro</h2>
+  <div class="card">
+    <form id="fDiagnostico" class="form" novalidate>
+      <label for="diagFaturamento">Seu faturamento mensal supera suas despesas? <select id="diagFaturamento"><option value="">Selecione</option><option value="sim">Sim</option><option value="nao">Não</option><option value="parcial">Parcialmente</option></select></label>
+      <label for="diagPreco">Você revisa preços e margem com frequência? <select id="diagPreco"><option value="">Selecione</option><option value="sim">Sim</option><option value="nao">Não</option><option value="asvezes">Às vezes</option></select></label>
+      <label for="diagCaixa">Você acompanha fluxo de caixa e vencimentos? <select id="diagCaixa"><option value="">Selecione</option><option value="sim">Sim</option><option value="nao">Não</option><option value="asvezes">Às vezes</option></select></label>
+      <label for="diagMeta">Você mantém metas e planejamento financeiro? <select id="diagMeta"><option value="">Selecione</option><option value="sim">Sim</option><option value="nao">Não</option><option value="asvezes">Às vezes</option></select></label>
+      <div class="actions">
+        <button type="submit" class="btn">Gerar diagnóstico</button>
+      </div>
+    </form>
+    <div id="diagResultado" class="stack" aria-live="polite"></div>
+  </div>
+
   <div class="two">
     <div>
       <h2>Resumo de metas</h2>
@@ -222,7 +244,7 @@
 <!-- ============ CALCULADORA ============ -->
 <section id="p-calculadora" class="page" hidden>
   <h1>Calculadora de markup e precificação</h1>
-  <p class="note">Preencha os campos que você conhece. A calculadora converte os percentuais, aplica as fórmulas de markup e mostra uma estimativa. Não invente impostos, taxas ou custos: use apenas valores reais do seu negócio.</p>
+  <p class="note">Preencha os campos que você conhece. A calculadora converte os percentuais, aplica as fórmulas de markup e mostra uma estimativa. Não invente impostos, taxas ou custos: use a realidade do seu negócio.</p>
 
   <div class="two calc-layout">
     <form id="fCalc" class="form" novalidate aria-describedby="calcAjuda">
@@ -372,7 +394,7 @@
   <div class="tw">
     <table>
       <caption class="sr">Fluxo de caixa por período</caption>
-      <thead><tr><th scope="col">Período</th><th scope="col">Entradas realizadas</th><th scope="col">Saídas realizadas</th><th scope="col">Entradas previstas</th><th scope="col">Saídas previstas</th><th scope="col">Saldo do período</th></tr></thead>
+      <thead><tr><th scope="col">Período</th><th scope="col">Entradas realizadas</th><th scope="col">Saídas realizadas</th><th scope="col">Entradas previstas</th><th scope="col">Saídas previstas</th><th scope="col">Saldo</th></tr></thead>
       <tbody id="fxTb"></tbody>
     </table>
   </div>
@@ -473,7 +495,7 @@
 <!-- ============ ASSISTENTE ============ -->
 <section id="p-assistente" class="page" hidden>
   <h1>Assistente financeiro</h1>
-  <p class="note">O assistente desta versão funciona por <b>regras e conteúdos previamente cadastrados</b> — não há integração com modelos de IA externos. Ele ajuda a entender conceitos e a usar o site, mas não inventa dados, não garante resultados e não substitui orientação contábil, jurídica ou financeira.</p>
+  <p class="note">O assistente desta versão funciona por <b>regras e conteúdos previamente cadastrados</b> — não há integração com modelos de IA externos. Ele ajuda a entender conceitos e usar as ferramentas de forma mais clara.</p>
   <div class="chat" id="aiLog" role="log" aria-live="polite" aria-label="Conversa com o assistente"></div>
   <div class="chips" id="aiSug" aria-label="Perguntas sugeridas">
     <button type="button" class="chip" data-q="O que é markup?">O que é markup?</button>
@@ -493,7 +515,7 @@
 <!-- ============ APRENDA ============ -->
 <section id="p-aprenda" class="page" hidden>
   <h1>Aprenda</h1>
-  <p class="note">Aulas curtas com exemplos numéricos, resumo, glossário e exercícios. Conteúdo educativo, sem caráter de consultoria individual. Cada módulo tem um questionário com correção e explicação.</p>
+  <p class="note">Aulas curtas com exemplos numéricos, resumo, glossário e exercícios. Conteúdo educativo, sem caráter de consultoria individual.</p>
   <div id="aprendaModulos" class="stack"></div>
 </section>
 
@@ -538,7 +560,7 @@
 <section id="p-conta" class="page" hidden>
   <h1>Minha conta</h1>
   <div class="alert warn" role="note">
-    <b>Versão de demonstração.</b> Nesta edição o site não possui servidor: o cadastro e o “login” são <b>locais</b> e servem apenas para identificar o perfil neste navegador. A autenticação e a proteção dos dados são <b>limitadas</b> e não devem ser usadas para informações sensíveis. Uma versão com autenticação real exige back-end, banco de dados e HTTPS (veja a seção de publicação).
+    <b>Versão de demonstração.</b> Nesta edição o site não possui servidor: o cadastro e o “login” são <b>locais</b> e servem apenas para identificar o perfil neste navegador. A autenticação é apenas demonstrativa.
   </div>
 
   <div id="contaLogado" hidden>
@@ -602,9 +624,9 @@
   <h1>Política de Privacidade</h1>
   <p class="note">[Modelo a revisar por profissional jurídico antes da publicação. Preencher: controlador, CNPJ, endereço e canal do encarregado de dados.]</p>
   <h2>Quais dados são coletados</h2>
-  <p>Nesta versão, o site <b>não envia dados a servidores</b>. Os lançamentos, produtos, metas, preferências e o perfil local ficam no armazenamento local (localStorage) do seu navegador. Não há contas em servidor, rastreadores nem serviços externos de análise.</p>
+  <p>Nesta versão, o site <b>não envia dados a servidores</b>. Os lançamentos, produtos, metas, preferências e o perfil local ficam no armazenamento local (localStorage) do seu navegador. Não coletamos informações de navegação nem cookies de terceiros.</p>
   <h2>Finalidades e bases legais</h2>
-  <p>Os dados são usados exclusivamente para o funcionamento das ferramentas que você utiliza. A base legal aplicável é o seu consentimento e a execução do serviço solicitado, conforme a LGPD (Lei nº 13.709/2018).</p>
+  <p>Os dados são usados exclusivamente para o funcionamento das ferramentas que você utiliza. A base legal aplicável é o seu consentimento e a execução do serviço solicitado, conforme a legislação aplicável.</p>
   <h2>Como os dados são armazenados e protegidos</h2>
   <p>Os dados permanecem no seu dispositivo. Recomendamos exportar cópias de segurança em <a href="#config">Configurações</a>. Limpar os dados do navegador também os remove.</p>
   <h2>Serviços externos</h2>
@@ -616,7 +638,7 @@
 <!-- ============ COOKIES ============ -->
 <section id="p-cookies" class="page legal" hidden>
   <h1>Política de Cookies</h1>
-  <p>O site usa apenas armazenamento local <b>estritamente necessário</b> ao funcionamento: seus dados financeiros, preferências de aparência e a escolha feita no aviso de cookies. Não usamos cookies de publicidade, análise ou rastreamento.</p>
+  <p>O site usa apenas armazenamento local <b>estritamente necessário</b> ao funcionamento: seus dados financeiros, preferências de aparência e a escolha feita no aviso de cookies. Não usamos rastreadores para publicidade.</p>
   <h2>Categorias utilizadas</h2>
   <ul class="ticks">
     <li><b>Necessários:</b> guardam seus dados e preferências para o site funcionar.</li>
@@ -630,7 +652,7 @@
   <h1>Termos de Uso</h1>
   <p class="note">[Modelo a revisar por profissional jurídico antes da publicação.]</p>
   <h2>Condições de utilização</h2>
-  <p>As calculadoras e relatórios são ferramentas de apoio gerencial e fornecem <b>estimativas</b>, sem garantia de lucro ou resultado, e não substituem orientação contábil, jurídica ou financeira.</p>
+  <p>As calculadoras e relatórios são ferramentas de apoio gerencial e fornecem <b>estimativas</b>, sem garantia de lucro ou resultado, e não substituem orientação contábil, jurídica ou financeira profissional.</p>
   <h2>Responsabilidades do usuário</h2>
   <p>Você é responsável pelos dados que registra e por manter cópias de segurança (exportação). Não utilize o site para finalidades ilícitas.</p>
   <h2>Contas e dados</h2>
