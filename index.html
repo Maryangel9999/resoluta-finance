@@ -1,706 +1,395 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Resoluta AGI + Resoluta Finance</title>
-<meta name="description" content="Entenda seus números. Tome melhores decisões. Gestão financeira, precificação e educação financeira para microempreendedores em São Luís–MA.">
-<meta name="theme-color" content="#6b1431">
-<meta name="author" content="Resoluta AGI — Administração, Gestão e Inovação">
-<link rel="icon" href="assets/logo-resoluta.jpeg">
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
-<a class="skip" href="#main">Pular para o conteúdo principal</a>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Resoluta Finance — gestão financeira para microempreendedores, pequenos empresários e autônomos."
+    />
+    <title>Resoluta Finance</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav">
+        <div class="brand">
+          <span class="brand-mark">R</span>
+          <span>Resoluta Finance</span>
+        </div>
 
-<header class="top">
-  <a href="#inicio" class="brand" aria-label="Resoluta AGI — página inicial">
-    <img src="assets/logo-resoluta.jpeg" alt="Logo Resoluta AGI: letra R em bordô e dourado">
-    <span class="brand-txt">Resoluta <b>Finance</b><small>Administração, Gestão e Inovação</small></span>
-  </a>
-  <button id="menuBtn" class="btn ghost menu-btn" aria-expanded="false" aria-controls="nav" aria-label="Abrir menu de navegação">Menu</button>
-  <nav id="nav" aria-label="Navegação principal">
-    <a href="#inicio">Início</a>
-    <a href="#sobre">Sobre</a>
-    <div class="dropdown" id="ddFerramentas">
-      <button class="dropbtn" id="ddBtn" aria-haspopup="true" aria-expanded="false" aria-controls="ddMenu">Ferramentas <span aria-hidden="true">▾</span></button>
-      <div class="dropmenu" id="ddMenu" role="menu" aria-label="Ferramentas financeiras">
-        <a role="menuitem" href="#painel">Painel financeiro</a>
-        <a role="menuitem" href="#calculadora">Calculadora de preços</a>
-        <a role="menuitem" href="#produtos">Produtos e serviços</a>
-        <a role="menuitem" href="#lancamentos">Lançamentos</a>
-        <a role="menuitem" href="#fluxo">Fluxo de caixa</a>
-        <a role="menuitem" href="#contas">Contas a pagar e receber</a>
-        <a role="menuitem" href="#relatorios">Relatórios</a>
-        <a role="menuitem" href="#planejamento">Planejamento e metas</a>
-        <a role="menuitem" href="#assistente">Assistente financeiro</a>
+        <button class="menu-toggle" aria-label="Abrir menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <nav class="main-nav" aria-label="Navegação principal">
+          <a href="#solucoes">Soluções</a>
+          <a href="#beneficios">Benefícios</a>
+          <a href="#metodo">Método</a>
+          <a href="#precos">Planos</a>
+          <a href="#contato">Contato</a>
+        </nav>
+
+        <a class="btn btn-primary desktop-only" href="#cta">Começar agora</a>
       </div>
-    </div>
-    <a href="#aprenda">Aprenda</a>
-    <a href="#contato">Contato</a>
-    <a href="#config">Configurações</a>
-    <a href="#conta" class="nav-conta">Minha conta</a>
-  </nav>
-</header>
+    </header>
 
-<main id="main" tabindex="-1">
+    <main>
+      <section class="hero">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <span class="eyebrow">Financeiro simples. Decisão inteligente.</span>
+            <h1>Organize sua renda, controle seus gastos e tome decisões com segurança.</h1>
+            <p class="lead">
+              A Resoluta Finance ajuda microempreendedores, pequenos empresários, autônomos e iniciantes
+              a transformar a gestão financeira em uma rotina clara, prática e estratégica.
+            </p>
 
-<!-- ============ INÍCIO ============ -->
-<section id="p-inicio" class="page" hidden>
-  <div class="hero">
-    <div class="hero-txt">
-      <p class="eyebrow">Resoluta AGI · São Luís–MA</p>
-      <h1>Entenda seus números.<br>Tome melhores decisões.</h1>
-      <p class="lead">Ferramentas simples de precificação, lançamentos, fluxo de caixa e educação financeira para quem está começando um negócio ou precisa se organizar melhor.</p>
-      <div class="actions">
-        <a class="btn" href="#calculadora">Calcular preço</a>
-        <a class="btn alt" href="#lancamentos">Organizar minhas finanças</a>
-        <a class="btn ghost" href="#painel">Conheça as ferramentas</a>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#cta">Quero começar</a>
+              <a class="btn btn-secondary" href="#solucoes">Ver soluções</a>
+            </div>
+
+            <ul class="social-proof">
+              <li>+12 mil usuários</li>
+              <li>Sem complicação</li>
+              <li>Controle em tempo real</li>
+            </ul>
+          </div>
+
+          <div class="hero-visual" aria-label="Dashboard financeiro ilustrado">
+            <div class="dashboard-card card-main">
+              <div class="dashboard-header">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+              </div>
+
+              <div class="dashboard-stats">
+                <div>
+                  <small>Receita</small>
+                  <strong>R$ 18.420</strong>
+                </div>
+                <div class="chip positive">+12.4%</div>
+              </div>
+
+              <div class="chart-bars">
+                <span style="height: 32%"></span>
+                <span style="height: 52%"></span>
+                <span style="height: 44%"></span>
+                <span style="height: 68%"></span>
+                <span style="height: 83%"></span>
+                <span style="height: 100%"></span>
+              </div>
+
+              <div class="summary-row">
+                <div>
+                  <small>Despesas</small>
+                  <strong>R$ 7.860</strong>
+                </div>
+                <div>
+                  <small>Lucro</small>
+                  <strong>R$ 10.560</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="floating-card card-mini">
+              <span class="mini-label">Meta mensal</span>
+              <strong>R$ 20.000</strong>
+              <span class="mini-progress">87% atingido</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="trust">
+        <div class="container trust-wrap">
+          <p>Confiança para quem quer crescer com clareza</p>
+          <div class="trust-badges">
+            <span>Finanças pessoais</span>
+            <span>Pequenos negócios</span>
+            <span>Autônomos</span>
+            <span>Microempreendedores</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="solucoes" class="section">
+        <div class="container">
+          <div class="section-heading">
+            <span class="eyebrow">Soluções</span>
+            <h2>Uma plataforma pensada para quem quer entender e controlar o dinheiro.</h2>
+          </div>
+
+          <div class="grid features-grid">
+            <article class="feature-card reveal">
+              <div class="icon">💰</div>
+              <h3>Controle financeiro</h3>
+              <p>Organize receitas, despesas, contas fixas e fluxo de caixa em um só lugar.</p>
+            </article>
+
+            <article class="feature-card reveal">
+              <div class="icon">📊</div>
+              <h3>Relatórios inteligentes</h3>
+              <p>Entenda o faturamento, os custos e o resultado real do seu negócio com clareza.</p>
+            </article>
+
+            <article class="feature-card reveal">
+              <div class="icon">🧮</div>
+              <h3>Precificação</h3>
+              <p>Calcule o valor ideal dos seus produtos e serviços com base em custos e margem.</p>
+            </article>
+
+            <article class="feature-card reveal">
+              <div class="icon">🎯</div>
+              <h3>Metas e planejamento</h3>
+              <p>Defina objetivos financeiros, acompanhe evolução e evite decisões impulsivas.</p>
+            </article>
+
+            <article class="feature-card reveal">
+              <div class="icon">📘</div>
+              <h3>Conteúdo educativo</h3>
+              <p>Aprenda financeiramente com materiais práticos voltados para o dia a dia do empreendedor.</p>
+            </article>
+
+            <article class="feature-card reveal">
+              <div class="icon">🛡️</div>
+              <h3>Decisões mais seguras</h3>
+              <p>Tenha uma leitura real da saúde financeira para agir com mais previsibilidade.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="beneficios" class="section alt-bg">
+        <div class="container split-layout">
+          <div class="left-copy reveal">
+            <span class="eyebrow">Por que escolher a Resoluta?</span>
+            <h2>Você para de adivinhar e passa a decidir com dados.</h2>
+            <p>
+              Muita gente sabe que precisa controlar o dinheiro, mas não sabe como começar. A Resoluta
+              transforma o caos financeiro em rotina simples, segura e estratégica.
+            </p>
+
+            <ul class="check-list">
+              <li>Organização financeira em poucos minutos</li>
+              <li>Visão real do faturamento e da rentabilidade</li>
+              <li>Planejamento para o futuro e para os próximos meses</li>
+              <li>Ferramentas acessíveis para quem está começando</li>
+            </ul>
+          </div>
+
+          <div class="benefit-panel reveal">
+            <div class="metric-box">
+              <span class="metric-label">Fluxo de caixa</span>
+              <strong data-counter="32480">0</strong>
+              <small>Saldo previsto no próximo ciclo</small>
+            </div>
+
+            <div class="mini-cards">
+              <div class="mini">
+                <span>Gasto fixo</span>
+                <strong>R$ 5.700</strong>
+              </div>
+              <div class="mini">
+                <span>Margem</span>
+                <strong>32%</strong>
+              </div>
+            </div>
+
+            <div class="alert-box">
+              <span class="alert-icon">⚠️</span>
+              <div>
+                <strong>Alerta:</strong>
+                <p>Seu gasto operacional está acima da meta. Ajuste os custos para manter a saúde financeira.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="metodo" class="section">
+        <div class="container">
+          <div class="section-heading center">
+            <span class="eyebrow">Como funciona</span>
+            <h2>Um processo simples para transformar sua relação com o dinheiro.</h2>
+          </div>
+
+          <div class="steps-grid">
+            <div class="step-card reveal">
+              <span class="step-number">01</span>
+              <h3>Registrar</h3>
+              <p>Cadastre receitas, despesas, custos fixos, variáveis e pagamentos recorrentes.</p>
+            </div>
+
+            <div class="step-card reveal">
+              <span class="step-number">02</span>
+              <h3>Entender</h3>
+              <p>Veja relatórios claros sobre faturamento, gastos, margem e performance financeira.</p>
+            </div>
+
+            <div class="step-card reveal">
+              <span class="step-number">03</span>
+              <h3>Planejar</h3>
+              <p>Defina metas, crises e estratégias para aumentar a previsibilidade e a rentabilidade.</p>
+            </div>
+
+            <div class="step-card reveal">
+              <span class="step-number">04</span>
+              <h3>Crescer</h3>
+              <p>Use os dados para tomar decisões com mais segurança, menos medo e mais consistência.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section dark-section">
+        <div class="container numbers-grid">
+          <div class="number-item reveal">
+            <strong data-counter="12000">0</strong>
+            <span>Usuários ativos</span>
+          </div>
+          <div class="number-item reveal">
+            <strong data-counter="96">0</strong>
+            <span>% acham mais fácil controlar gastos</span>
+          </div>
+          <div class="number-item reveal">
+            <strong data-counter="3">0</strong>
+            <span>x mais clareza para decisão</span>
+          </div>
+          <div class="number-item reveal">
+            <strong data-counter="24">0</strong>
+            <span>/7 acesso à visão financeira</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="precos" class="section">
+        <div class="container">
+          <div class="section-heading center">
+            <span class="eyebrow">Planos</span>
+            <h2>Escolha a melhor forma de começar.</h2>
+          </div>
+
+          <div class="pricing-grid">
+            <article class="price-card reveal">
+              <span class="plan-tag">Iniciante</span>
+              <h3>Essencial</h3>
+              <div class="price">R$ 29<span>/mês</span></div>
+              <ul>
+                <li>Controle de receitas e despesas</li>
+                <li>Relatórios básicos</li>
+                <li>Meta financeira mensal</li>
+                <li>Suporte por e-mail</li>
+              </ul>
+              <a href="#cta" class="btn btn-secondary">Começar</a>
+            </article>
+
+            <article class="price-card featured reveal">
+              <span class="plan-tag featured-badge">Mais popular</span>
+              <h3>Pro</h3>
+              <div class="price">R$ 79<span>/mês</span></div>
+              <ul>
+                <li>Todos os recursos do Essential</li>
+                <li>Precificação de produtos/serviços</li>
+                <li>Relatórios avançados</li>
+                <li>Alertas financeiros</li>
+              </ul>
+              <a href="#cta" class="btn btn-primary">Quero esse</a>
+            </article>
+
+            <article class="price-card reveal">
+              <span class="plan-tag">Negócios</span>
+              <h3>Exec</h3>
+              <div class="price">R$ 149<span>/mês</span></div>
+              <ul>
+                <li>Gestão financeira completa</li>
+                <li>Planejamento estratégico</li>
+                <li>Consultoria de acompanhamento</li>
+                <li>Suporte prioritário</li>
+              </ul>
+              <a href="#cta" class="btn btn-secondary">Falar com especialista</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="contato" class="section">
+        <div class="container contact-box">
+          <div class="contact-copy">
+            <span class="eyebrow">Vamos conversar?</span>
+            <h2>Quer entender melhor como a Resoluta pode ajudar o seu negócio?</h2>
+          </div>
+
+          <form class="contact-form" id="contactForm">
+            <input type="text" placeholder="Seu nome" required />
+            <input type="email" placeholder="Seu e-mail" required />
+            <textarea rows="4" placeholder="Fale um pouco sobre seu negócio"></textarea>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+          </form>
+        </div>
+      </section>
+
+      <section id="cta" class="section cta-section">
+        <div class="container cta-box">
+          <div>
+            <span class="eyebrow">Comece hoje</span>
+            <h2>Deixe a sua gestão financeira mais clara, eficiente e inteligente.</h2>
+          </div>
+
+          <a href="mailto:contato@resolutafinance.com.br" class="btn btn-primary">
+            Solicitar demonstração
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <div class="brand">
+            <span class="brand-mark">R</span>
+            <span>Resoluta Finance</span>
+          </div>
+          <p>Gestão financeira clara para quem quer crescer sem improviso.</p>
+        </div>
+
+        <div>
+          <h4>Navegação</h4>
+          <ul>
+            <li><a href="#solucoes">Soluções</a></li>
+            <li><a href="#beneficios">Benefícios</a></li>
+            <li><a href="#metodo">Método</a></li>
+            <li><a href="#precos">Planos</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Contato</h4>
+          <ul>
+            <li><a href="mailto:contato@resolutafinance.com.br">contato@resolutafinance.com.br</a></li>
+            <li><a href="tel:+5511999999999">(11) 99999-9999</a></li>
+            <li>São Paulo, Brasil</li>
+          </ul>
+        </div>
       </div>
-      <ul class="hero-tags">
-        <li>Sem instalar aplicativo</li>
-        <li>Funciona no navegador</li>
-        <li>Seus dados ficam no seu dispositivo</li>
-      </ul>
-    </div>
-    <div class="hero-visual">
-      <img class="hero-logo" src="assets/logo-resoluta.jpeg" alt="Identidade visual da Resoluta AGI: a letra R em bordô com traço dourado e o texto Administração, Gestão e Inovação">
-    </div>
-  </div>
 
-  <div class="grid">
-    <article class="card feature">
-      <h2><span class="ico" aria-hidden="true">%</span> Precificação</h2>
-      <p>Calcule markup e preço de venda sugerido, com explicação passo a passo e exemplos.</p>
-      <a class="card-link" href="#calculadora">Abrir calculadora</a>
-    </article>
-    <article class="card feature">
-      <h2><span class="ico" aria-hidden="true">⇄</span> Lançamentos</h2>
-      <p>Registre receitas e despesas separando o que já aconteceu do que ainda está previsto.</p>
-      <a class="card-link" href="#lancamentos">Abrir lançamentos</a>
-    </article>
-    <article class="card feature">
-      <h2><span class="ico" aria-hidden="true">▤</span> Painel</h2>
-      <p>Acompanhe saldo realizado, saldo projetado, contas a pagar e a receber em um só lugar.</p>
-      <a class="card-link" href="#painel">Abrir painel</a>
-    </article>
-    <article class="card feature">
-      <h2><span class="ico" aria-hidden="true">◈</span> Relatórios</h2>
-      <p>Veja resultados por período e categoria e exporte os dados quando precisar.</p>
-      <a class="card-link" href="#relatorios">Abrir relatórios</a>
-    </article>
-    <article class="card feature">
-      <h2><span class="ico" aria-hidden="true">◎</span> Aprenda</h2>
-      <p>Conceitos de gestão financeira em linguagem simples, com exemplos e exercícios.</p>
-      <a class="card-link" href="#aprenda">Abrir aulas</a>
-    </article>
-    <article class="card feature">
-      <h2><span class="ico" aria-hidden="true">✦</span> Assistente</h2>
-      <p>Tire dúvidas sobre markup, custos, despesas e lucro com um assistente baseado em regras.</p>
-      <a class="card-link" href="#assistente">Conversar agora</a>
-    </article>
-  </div>
-
-  <section class="band">
-    <h2>Planos e acesso</h2>
-    <div class="grid grid-3" id="planosResumoHome"></div>
-  </section>
-
-  <section class="band">
-    <h2>Por que a Resoluta?</h2>
-    <div class="grid grid-3">
-      <div class="mini"><h3>Tecnologia simples</h3><p>Uma experiência direta, que funciona no computador e no celular, sem planilhas complicadas.</p></div>
-      <div class="mini"><h3>Orientação prática</h3><p>Cada ferramenta explica o que está sendo calculado e por quê, para você aprender usando.</p></div>
-      <div class="mini"><h3>Acessível e inclusiva</h3><p>Alto contraste, tema escuro, fonte ampliada, leitura em voz alta e navegação por teclado.</p></div>
-    </div>
-  </section>
-
-  <div class="cta-final">
-    <h2>Pronto para organizar o seu negócio?</h2>
-    <p>Comece pela ferramenta que faz mais sentido para você agora. Você pode cadastrar seus dados aos poucos.</p>
-    <div class="actions">
-      <a class="btn" href="#calculadora">Calcular preço</a>
-      <a class="btn alt" href="#lancamentos">Organizar minhas finanças</a>
-    </div>
-  </div>
-</section>
-
-<!-- ============ SOBRE ============ -->
-<section id="p-sobre" class="page" hidden>
-  <h1>Sobre a Resoluta AGI</h1>
-  <div class="two">
-    <div>
-      <p class="lead">Muitos microempreendedores começam seus negócios com dedicação e boas ideias, mas enfrentam dificuldades para calcular preços de venda, controlar despesas, organizar o estoque e entender o que realmente está rendendo.</p>
-      <p>Foi pensando nesse desafio que surgiu a proposta da <b>Resoluta AGI — Administração, Gestão e Inovação</b>, uma microempresa voltada a oferecer soluções de gestão para negócios em crescimento.</p>
-      <p>Sua solução financeira, a <b>Resoluta Finance</b>, reúne ferramentas de precificação, controle de receitas e despesas, fluxo de caixa, relatórios e educação financeira em uma experiência simples e funcional.</p>
-      <p>Nosso diferencial é unir tecnologia, simplicidade e orientação prática, ajudando o empreendedor a compreender os resultados do negócio e a tomar decisões mais estratégicas.</p>
-      <p class="pitch">Resoluta AGI + Resoluta Finance: sua gestão mais clara, suas decisões mais estratégicas e seu negócio preparado para evoluir.</p>
-    </div>
-    <figure class="team">
-      <img class="photo" src="assets/equipe-resoluta.png" alt="Equipe da Resoluta AGI reunida e sorrindo em frente a um mural colorido de arte urbana">
-      <figcaption>Nossa equipe, em São Luís–MA.</figcaption>
-    </figure>
-  </div>
-
-  <div class="grid grid-3">
-    <article class="card"><h2>Missão</h2><p>Oferecer ferramentas e orientações acessíveis de gestão, simplificando processos financeiros para negócios que precisam se organizar e crescer de forma sustentável.</p></article>
-    <article class="card"><h2>Visão</h2><p>Contribuir para que microempreendedores tenham mais autonomia, clareza financeira e capacidade de planejamento.</p></article>
-    <article class="card"><h2>Valores</h2>
-      <ul class="ticks">
-        <li>Clareza e transparência</li>
-        <li>Inovação responsável</li>
-        <li>Organização</li>
-        <li>Acessibilidade e inclusão</li>
-        <li>Segurança e privacidade</li>
-        <li>Compromisso com o empreendedor</li>
-      </ul>
-    </article>
-  </div>
-
-  <details class="card">
-    <summary>Planejamento do projeto (5W2H)</summary>
-    <div class="tw">
-      <table>
-        <caption class="sr">Planejamento do projeto em formato 5W2H</caption>
-        <tbody>
-          <tr><th scope="row">What — O quê?</th><td>Site de gestão financeira para auxiliar microempreendedores na organização das finanças e na precificação de produtos e serviços.</td></tr>
-          <tr><th scope="row">Why — Por quê?</th><td>Facilitar a gestão financeira, melhorar a compreensão dos custos e apoiar decisões conscientes.</td></tr>
-          <tr><th scope="row">Where — Onde?</th><td>Site acessível pelo navegador, em computadores e dispositivos móveis, com atuação inicial em São Luís–MA.</td></tr>
-          <tr><th scope="row">When — Quando?</th><td>Durante as etapas de planejamento, desenvolvimento, testes, publicação e manutenção.</td></tr>
-          <tr><th scope="row">Who — Quem?</th><td>Equipe do projeto Resoluta AGI, com apoio de desenvolvimento web e gestão financeira.</td></tr>
-          <tr><th scope="row">How — Como?</th><td>Ferramentas de precificação, lançamentos, fluxo de caixa, relatórios, planejamento e conteúdos educativos.</td></tr>
-          <tr><th scope="row">How much — Quanto?</th><td>Custos a considerar: desenvolvimento, domínio, hospedagem, banco de dados, APIs, manutenção e serviços. Valores dependem do escopo e das integrações.</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </details>
-
-  <div class="band">
-    <h2>Serviços da Resoluta AGI</h2>
-    <div class="grid grid-3">
-      <div class="mini"><h3>Apoio à organização financeira</h3><p>Estruturação de receitas, despesas e fluxo de caixa para dar clareza ao dia a dia do negócio.</p></div>
-      <div class="mini"><h3>Precificação</h3><p>Definição de preços de venda considerando custos, despesas e margem desejada.</p></div>
-      <div class="mini"><h3>Planejamento e processos</h3><p>Metas, cenários e melhoria de processos para decisões mais conscientes.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ PAINEL ============ -->
-<section id="p-painel" class="page" hidden>
-  <h1>Painel financeiro</h1>
-  <p class="note">Os indicadores são calculados a partir dos dados que você registra. O filtro usa a data de pagamento/recebimento para valores realizados e a data de vencimento para valores previstos.</p>
-  <form id="fPeriodo" class="row card-inline" aria-label="Filtro de período e saldo inicial">
-    <label>De <input type="date" id="pDe"></label>
-    <label>Até <input type="date" id="pAte"></label>
-    <label>Saldo inicial (R$) <input type="number" step="0.01" id="saldoIni" value="0"></label>
-    <button type="button" class="btn ghost" id="limpaPeriodo">Limpar filtro</button>
-  </form>
-
-  <div id="painelVazio" class="empty" hidden>
-    <p><b>Ainda não há lançamentos.</b></p>
-    <p>Comece registrando suas primeiras receitas e despesas em <a href="#lancamentos">Lançamentos</a> para ver seus indicadores aqui.</p>
-  </div>
-
-  <div class="grid kpis" id="kpis" aria-live="polite"></div>
-
-  <h2>Realizado × Previsto</h2>
-  <div id="grafico" class="chart" role="img" aria-label="Gráfico de barras comparando valores recebidos, pagos, a receber e a pagar"></div>
-  <p id="graficoTxt" class="note"></p>
-
-  <h2>Evolução financeira (mensal)</h2>
-  <div id="evoChart" class="chart" role="img" aria-label="Gráfico de evolução mensal de receitas e despesas"></div>
-  <p id="evoTxt" class="note"></p>
-
-  <h2>Indicadores avançados</h2>
-  <div id="indicadoresAvancados" class="grid" aria-live="polite"></div>
-
-  <h2>Diagnóstico financeiro</h2>
-  <div class="card">
-    <form id="fDiagnostico" class="form" novalidate>
-      <label for="diagFaturamento">Seu faturamento mensal supera suas despesas? <select id="diagFaturamento"><option value="">Selecione</option><option value="sim">Sim</option><option value="nao">Não</option><option value="parcial">Parcialmente</option></select></label>
-      <label for="diagPreco">Você revisa preços e margem com frequência? <select id="diagPreco"><option value="">Selecione</option><option value="sim">Sim</option><option value="nao">Não</option><option value="asvezes">Às vezes</option></select></label>
-      <label for="diagCaixa">Você acompanha fluxo de caixa e vencimentos? <select id="diagCaixa"><option value="">Selecione</option><option value="sim">Sim</option><option value="nao">Não</option><option value="asvezes">Às vezes</option></select></label>
-      <label for="diagMeta">Você mantém metas e planejamento financeiro? <select id="diagMeta"><option value="">Selecione</option><option value="sim">Sim</option><option value="nao">Não</option><option value="asvezes">Às vezes</option></select></label>
-      <div class="actions">
-        <button type="submit" class="btn">Gerar diagnóstico</button>
+      <div class="container footer-bottom">
+        <p>© 2026 Resoluta Finance. Todos os direitos reservados.</p>
       </div>
-    </form>
-    <div id="diagResultado" class="stack" aria-live="polite"></div>
-  </div>
+    </footer>
 
-  <div class="two">
-    <div>
-      <h2>Resumo de metas</h2>
-      <div id="metasResumo" class="stack"></div>
-    </div>
-    <div>
-      <h2>Resumo de produtos e serviços</h2>
-      <div id="prodResumo" class="stack"></div>
-    </div>
-  </div>
-  <p class="note">Contas a pagar/receber pendentes são <b>projeções</b> e não compõem o saldo realizado.</p>
-</section>
+    <button class="scroll-top" aria-label="Voltar ao topo">↑</button>
 
-<!-- ============ CALCULADORA ============ -->
-<section id="p-calculadora" class="page" hidden>
-  <h1>Calculadora de markup e precificação</h1>
-  <p class="note">Preencha os campos que você conhece. A calculadora converte os percentuais, aplica as fórmulas de markup e mostra uma estimativa. Não invente impostos, taxas ou custos: use a realidade do seu negócio.</p>
-
-  <div class="two calc-layout">
-    <form id="fCalc" class="form" novalidate aria-describedby="calcAjuda">
-      <label for="cNome">Nome do produto ou serviço <input id="cNome" required autocomplete="off"></label>
-      <label for="cCusto">Custo direto unitário (R$) <input id="cCusto" type="number" step="0.01" min="0" required inputmode="decimal"></label>
-      <label for="cVar">Despesas variáveis % <span class="hint">(impostos, taxas e comissões que você conhece)</span> <input id="cVar" type="number" step="0.01" min="0" max="100" required inputmode="decimal"></label>
-      <label for="cFix">Despesas fixas % <span class="hint">(rateio sobre as vendas)</span> <input id="cFix" type="number" step="0.01" min="0" max="100" required inputmode="decimal"></label>
-      <label for="cLucro">Margem de lucro desejada % <input id="cLucro" type="number" step="0.01" min="0" max="100" required inputmode="decimal"></label>
-      <label for="cQtd">Quantidade vendida <span class="hint">(opcional)</span> <input id="cQtd" type="number" min="0" step="1" inputmode="numeric"></label>
-      <label for="cPreco">Preço praticado (R$) <span class="hint">(opcional)</span> <input id="cPreco" type="number" step="0.01" min="0" inputmode="decimal"></label>
-      <div class="actions">
-        <button class="btn" type="submit">Calcular</button>
-        <button class="btn ghost" type="button" id="cLimpa">Limpar</button>
-        <button class="btn alt" type="button" id="cSalva" disabled>Salvar em Produtos</button>
-      </div>
-    </form>
-
-    <div class="calc-help" id="calcAjuda">
-      <h2>Como funciona?</h2>
-      <p><b>Markup divisor</b> = 1 − (variáveis% + fixas% + lucro%).</p>
-      <p><b>Markup multiplicador</b> = 1 ÷ markup divisor.</p>
-      <p><b>Preço sugerido</b> = custo direto ÷ markup divisor.</p>
-      <div class="example">
-        <p><b>Exemplo educativo</b></p>
-        <p>Custo R$ 20,00 · variáveis 10% · fixas 15% · lucro 25%<br>
-        Divisor = 1 − 0,50 = 0,50 · Multiplicador = 2,00 · Preço sugerido = R$ 40,00.</p>
-      </div>
-      <p class="note">Se a soma dos percentuais chegar a 100% ou mais, o cálculo é bloqueado: não existe preço que cubra essas despesas com esse custo. Reduza algum percentual.</p>
-      <details>
-        <summary>Diferença entre lucro bruto, operacional e líquido</summary>
-        <p><b>Lucro bruto</b> = vendas − custo dos itens vendidos.</p>
-        <p><b>Resultado operacional</b> = lucro bruto − despesas (fixas e variáveis).</p>
-        <p><b>Lucro líquido estimado</b> = resultado após considerar as despesas informadas. Não conte a mesma despesa duas vezes.</p>
-      </details>
-      <details>
-        <summary>Dicas de precificação</summary>
-        <ul class="ticks">
-          <li>Inclua taxas de cartão e comissões nas despesas variáveis.</li>
-          <li>Não esqueça o rateio das despesas fixas.</li>
-          <li>Revise os preços quando os custos mudarem.</li>
-          <li>Compare o preço sugerido com o que o mercado pratica.</li>
-        </ul>
-      </details>
-    </div>
-  </div>
-
-  <div id="cMsg" role="alert" class="msg"></div>
-  <div id="cRes" class="grid" aria-live="polite"></div>
-</section>
-
-<!-- ============ PRODUTOS ============ -->
-<section id="p-produtos" class="page" hidden>
-  <h1>Produtos e serviços</h1>
-  <p class="note">Cadastre o que você vende para reutilizar custos e preços na calculadora e nos relatórios.</p>
-  <form id="fProd" class="form" novalidate>
-    <input type="hidden" id="prId">
-    <label for="prNome">Nome <input id="prNome" required autocomplete="off"></label>
-    <label for="prCat">Categoria <input id="prCat" list="listaCategorias" autocomplete="off"></label>
-    <label for="prDesc">Descrição <input id="prDesc" autocomplete="off"></label>
-    <label for="prCusto">Custo unitário (R$) <input id="prCusto" type="number" step="0.01" min="0" required inputmode="decimal"></label>
-    <label for="prPreco">Preço de venda (R$) <input id="prPreco" type="number" step="0.01" min="0" required inputmode="decimal"></label>
-    <label for="prQtd">Quantidade disponível <input id="prQtd" type="number" min="0" step="1" inputmode="numeric"></label>
-    <div class="actions">
-      <button class="btn" type="submit">Salvar</button>
-      <button type="button" class="btn ghost" id="prCancel">Cancelar edição</button>
-    </div>
-  </form>
-  <div id="prMsg" role="alert" class="msg"></div>
-  <div class="row">
-    <label>Buscar <input id="prBusca" type="search" placeholder="Nome ou categoria"></label>
-  </div>
-  <div class="tw">
-    <table>
-      <caption class="sr">Lista de produtos e serviços cadastrados</caption>
-      <thead><tr><th scope="col">Nome</th><th scope="col">Categoria</th><th scope="col">Custo</th><th scope="col">Preço</th><th scope="col">Margem</th><th scope="col">Qtd</th><th scope="col">Cadastro</th><th scope="col">Ações</th></tr></thead>
-      <tbody id="prTb"></tbody>
-    </table>
-  </div>
-  <p id="prVazio" class="empty" hidden>Nenhum produto ou serviço cadastrado ainda. Use o formulário acima para começar.</p>
-</section>
-
-<!-- ============ LANÇAMENTOS ============ -->
-<section id="p-lancamentos" class="page" hidden>
-  <h1>Lançamentos financeiros</h1>
-  <p class="note">Registre receitas e despesas. Valores <b>realizados</b> (pagos/recebidos) entram no saldo; valores <b>pendentes</b> são projeções.</p>
-  <form id="fLanc" class="form" novalidate>
-    <input type="hidden" id="lId">
-    <label for="lDesc">Descrição <input id="lDesc" required autocomplete="off"></label>
-    <label for="lTipo">Tipo
-      <select id="lTipo"><option value="receita">Receita</option><option value="despesa">Despesa</option></select>
-    </label>
-    <label for="lCat">Categoria <input id="lCat" required list="listaCategorias" autocomplete="off"></label>
-    <label for="lValor">Valor (R$) <input id="lValor" type="number" step="0.01" min="0.01" required inputmode="decimal"></label>
-    <label for="lVenc">Data de vencimento <input id="lVenc" type="date" required></label>
-    <label for="lSit">Situação
-      <select id="lSit"><option value="pendente">Pendente (previsto)</option><option value="realizado">Pago / recebido</option></select>
-    </label>
-    <label for="lPag">Data de pagamento/recebimento <input id="lPag" type="date"></label>
-    <label for="lForma">Forma de pagamento <input id="lForma" list="listaFormas" autocomplete="off"></label>
-    <label for="lObs">Observações <input id="lObs" autocomplete="off"></label>
-    <div class="actions">
-      <button class="btn" type="submit">Salvar lançamento</button>
-      <button type="button" class="btn ghost" id="lCancel">Cancelar edição</button>
-    </div>
-  </form>
-  <div id="lMsg" role="alert" class="msg"></div>
-  <div class="row">
-    <label>Buscar <input id="lBusca" type="search" placeholder="Descrição ou categoria"></label>
-    <label>Tipo <select id="lFTipo"><option value="">Todos</option><option value="receita">Receitas</option><option value="despesa">Despesas</option></select></label>
-    <label>Situação <select id="lFSit"><option value="">Todas</option><option value="pendente">Pendentes</option><option value="vencido">Vencidos</option><option value="realizado">Realizados</option></select></label>
-    <label>Ordenar <select id="lOrd"><option value="venc">Vencimento</option><option value="valor">Valor</option><option value="desc">Descrição</option></select></label>
-    <button class="btn ghost" id="lCsv" type="button">Exportar CSV</button>
-  </div>
-  <div class="tw">
-    <table>
-      <caption class="sr">Lista de lançamentos financeiros</caption>
-      <thead><tr><th scope="col">Vencimento</th><th scope="col">Descrição</th><th scope="col">Tipo</th><th scope="col">Categoria</th><th scope="col">Valor</th><th scope="col">Situação</th><th scope="col">Ações</th></tr></thead>
-      <tbody id="lTb"></tbody>
-    </table>
-  </div>
-  <p id="lVazio" class="empty" hidden>Nenhum lançamento encontrado. Ajuste os filtros ou cadastre um novo lançamento.</p>
-</section>
-
-<!-- ============ FLUXO DE CAIXA ============ -->
-<section id="p-fluxo" class="page" hidden>
-  <h1>Fluxo de caixa</h1>
-  <p class="note">Acompanhe entradas e saídas realizadas e previstas. O saldo realizado considera apenas o que já foi pago ou recebido; o saldo projetado inclui o que está pendente.</p>
-  <form id="fFluxo" class="row card-inline" aria-label="Filtro do fluxo de caixa">
-    <label>De <input type="date" id="fxDe"></label>
-    <label>Até <input type="date" id="fxAte"></label>
-    <label>Visão
-      <select id="fxVisao"><option value="diario">Diário</option><option value="semanal">Semanal</option><option value="mensal">Mensal</option></select>
-    </label>
-    <label>Categoria <input id="fxCat" list="listaCategorias"></label>
-    <button type="button" class="btn ghost" id="fxLimpa">Limpar filtro</button>
-  </form>
-
-  <div id="fxAlerta" class="alert" role="status" hidden></div>
-
-  <div class="grid kpis" id="fxResumo" aria-live="polite"></div>
-
-  <h2>Entradas e saídas por período</h2>
-  <div id="fxChart" class="chart" role="img" aria-label="Gráfico de entradas e saídas por período"></div>
-  <p id="fxTxt" class="note"></p>
-
-  <h2>Movimento detalhado</h2>
-  <div class="tw">
-    <table>
-      <caption class="sr">Fluxo de caixa por período</caption>
-      <thead><tr><th scope="col">Período</th><th scope="col">Entradas realizadas</th><th scope="col">Saídas realizadas</th><th scope="col">Entradas previstas</th><th scope="col">Saídas previstas</th><th scope="col">Saldo</th></tr></thead>
-      <tbody id="fxTb"></tbody>
-    </table>
-  </div>
-  <p id="fxVazio" class="empty" hidden>Nenhum movimento no período selecionado.</p>
-</section>
-
-<!-- ============ CONTAS A PAGAR E RECEBER ============ -->
-<section id="p-contas" class="page" hidden>
-  <h1>Contas a pagar e receber</h1>
-  <p class="note">Contas com vencimento anterior a hoje e ainda pendentes aparecem como <b>vencidas</b>. Os alertas abaixo são exibidos dentro do site; não há envio de notificações externas.</p>
-
-  <div class="grid kpis" id="ctResumo" aria-live="polite"></div>
-
-  <div id="ctAlerta" class="alert" role="status" hidden></div>
-
-  <div class="row">
-    <label>Mostrar
-      <select id="ctFiltro">
-        <option value="todas">Todas as pendentes</option>
-        <option value="pagar">Somente a pagar</option>
-        <option value="receber">Somente a receber</option>
-        <option value="vencidas">Somente vencidas</option>
-      </select>
-    </label>
-    <button class="btn ghost" id="ctCsv" type="button">Exportar CSV</button>
-  </div>
-
-  <div class="tw">
-    <table>
-      <caption class="sr">Contas a pagar e a receber pendentes</caption>
-      <thead><tr><th scope="col">Vencimento</th><th scope="col">Descrição</th><th scope="col">Tipo</th><th scope="col">Categoria</th><th scope="col">Valor</th><th scope="col">Situação</th><th scope="col">Ações</th></tr></thead>
-      <tbody id="ctTb"></tbody>
-    </table>
-  </div>
-  <p id="ctVazio" class="empty" hidden>Não há contas pendentes. Cadastre lançamentos com situação “Pendente” em <a href="#lancamentos">Lançamentos</a>.</p>
-</section>
-
-<!-- ============ RELATÓRIOS ============ -->
-<section id="p-relatorios" class="page" hidden>
-  <h1>Relatórios financeiros</h1>
-  <p class="note">Relatórios gerenciais de apoio. São estimativas e não substituem demonstrações contábeis oficiais.</p>
-  <form id="fRel" class="row card-inline" aria-label="Filtros dos relatórios">
-    <label>De <input type="date" id="rDe"></label>
-    <label>Até <input type="date" id="rAte"></label>
-    <label>Tipo <select id="rTipo"><option value="">Todos</option><option value="receita">Receitas</option><option value="despesa">Despesas</option></select></label>
-    <label>Categoria <input id="rCat" list="listaCategorias"></label>
-    <label>Produto/serviço <input id="rProd" list="listaProdutos"></label>
-    <div class="actions">
-      <button class="btn" type="submit">Gerar relatório</button>
-      <button class="btn ghost" type="button" id="rCsv">Exportar CSV</button>
-      <button class="btn ghost" type="button" id="rPdf">Exportar PDF (imprimir)</button>
-    </div>
-  </form>
-  <div id="rMsg" role="alert" class="msg"></div>
-  <div id="rSaida" class="stack" aria-live="polite"></div>
-  <p id="rVazio" class="empty" hidden>Nenhum dado para os filtros escolhidos. Ajuste o período ou cadastre lançamentos.</p>
-</section>
-
-<!-- ============ PLANEJAMENTO E METAS ============ -->
-<section id="p-planejamento" class="page" hidden>
-  <h1>Planejamento financeiro e metas</h1>
-  <p class="note">Defina metas com valor e prazo e acompanhe o progresso. As projeções são estimativas, não garantias de resultado.</p>
-
-  <h2>Metas</h2>
-  <form id="fMeta" class="form" novalidate>
-    <input type="hidden" id="mtId">
-    <label for="mtNome">Nome da meta <input id="mtNome" required autocomplete="off"></label>
-    <label for="mtAlvo">Valor alvo (R$) <input id="mtAlvo" type="number" step="0.01" min="0.01" required inputmode="decimal"></label>
-    <label for="mtAtual">Valor já alcançado (R$) <input id="mtAtual" type="number" step="0.01" min="0" inputmode="decimal"></label>
-    <label for="mtPrazo">Prazo <input id="mtPrazo" type="date"></label>
-    <div class="actions">
-      <button class="btn" type="submit">Salvar meta</button>
-      <button type="button" class="btn ghost" id="mtCancel">Cancelar edição</button>
-    </div>
-  </form>
-  <div id="mtMsg" role="alert" class="msg"></div>
-  <div id="mtLista" class="stack"></div>
-  <p id="mtVazio" class="empty" hidden>Nenhuma meta cadastrada ainda.</p>
-
-  <h2>Simulador de cenários</h2>
-  <p class="note">Teste o impacto de mudanças em custos, preços e volume de vendas. Os resultados são projeções.</p>
-  <form id="fCenario" class="form" novalidate>
-    <label for="cnCusto">Custo unitário atual (R$) <input id="cnCusto" type="number" step="0.01" min="0" inputmode="decimal"></label>
-    <label for="cnPreco">Preço de venda atual (R$) <input id="cnPreco" type="number" step="0.01" min="0" inputmode="decimal"></label>
-    <label for="cnVolume">Volume de vendas (unidades) <input id="cnVolume" type="number" step="1" min="0" inputmode="numeric"></label>
-    <label for="cnVarCusto">Variação no custo (%) <input id="cnVarCusto" type="number" step="0.1" value="0" inputmode="decimal"></label>
-    <label for="cnVarPreco">Variação no preço (%) <input id="cnVarPreco" type="number" step="0.1" value="0" inputmode="decimal"></label>
-    <label for="cnVarVolume">Variação no volume (%) <input id="cnVarVolume" type="number" step="0.1" value="0" inputmode="decimal"></label>
-    <div class="actions">
-      <button class="btn" type="submit">Simular cenário</button>
-      <button type="button" class="btn ghost" id="cnLimpa">Limpar</button>
-    </div>
-  </form>
-  <div id="cnMsg" role="alert" class="msg"></div>
-  <div id="cnRes" class="grid" aria-live="polite"></div>
-</section>
-
-<!-- ============ ASSISTENTE ============ -->
-<section id="p-assistente" class="page" hidden>
-  <h1>Assistente financeiro</h1>
-  <p class="note">O assistente desta versão funciona por <b>regras e conteúdos previamente cadastrados</b> — não há integração com modelos de IA externos. Ele ajuda a entender conceitos e usar as ferramentas de forma mais clara.</p>
-  <div class="chat" id="aiLog" role="log" aria-live="polite" aria-label="Conversa com o assistente"></div>
-  <div class="chips" id="aiSug" aria-label="Perguntas sugeridas">
-    <button type="button" class="chip" data-q="O que é markup?">O que é markup?</button>
-    <button type="button" class="chip" data-q="Como calcular o preço de venda?">Como calcular o preço de venda?</button>
-    <button type="button" class="chip" data-q="Qual a diferença entre lucro bruto e líquido?">Lucro bruto x líquido</button>
-    <button type="button" class="chip" data-q="Como organizar o fluxo de caixa?">Como organizar o fluxo de caixa?</button>
-    <button type="button" class="chip" data-q="Como interpretar meus relatórios?">Interpretar relatórios</button>
-    <button type="button" class="chip" data-q="Onde cadastro meus lançamentos?">Onde cadastro lançamentos?</button>
-  </div>
-  <form id="fAi" class="row" aria-label="Enviar mensagem ao assistente">
-    <label class="grow">Sua pergunta <input id="aiInput" autocomplete="off" placeholder="Ex.: como calcular o markup?"></label>
-    <button class="btn" type="submit">Enviar</button>
-    <button class="btn ghost" type="button" id="aiLimpa">Limpar conversa</button>
-  </form>
-</section>
-
-<!-- ============ APRENDA ============ -->
-<section id="p-aprenda" class="page" hidden>
-  <h1>Aprenda</h1>
-  <p class="note">Aulas curtas com exemplos numéricos, resumo, glossário e exercícios. Conteúdo educativo, sem caráter de consultoria individual.</p>
-  <div id="aprendaModulos" class="stack"></div>
-</section>
-
-<!-- ============ CONFIGURAÇÕES ============ -->
-<section id="p-config" class="page" hidden>
-  <h1>Configurações</h1>
-
-  <h2>Aparência e acessibilidade</h2>
-  <div class="row card-inline">
-    <label>Tema <select id="cfTema"><option value="claro">Claro</option><option value="escuro">Escuro</option></select></label>
-    <label class="check"><input type="checkbox" id="cfContraste"> Alto contraste</label>
-    <label class="check"><input type="checkbox" id="cfLeitura"> Leitura simplificada</label>
-    <label class="check"><input type="checkbox" id="cfAnim"> Reduzir animações</label>
-  </div>
-  <div class="actions">
-    <button class="btn ghost" id="fMais" type="button">A+ Aumentar fonte</button>
-    <button class="btn ghost" id="fMenos" type="button">A− Diminuir fonte</button>
-    <button class="btn ghost" id="fReset" type="button">Fonte padrão</button>
-    <button class="btn alt" id="lerBtn" type="button">Ler página em voz alta</button>
-    <button class="btn ghost" id="pausaBtn" type="button">Pausar / continuar</button>
-    <button class="btn ghost" id="paraBtn" type="button">Parar leitura</button>
-  </div>
-
-  <h2>Preferências financeiras</h2>
-  <div class="row card-inline">
-    <label>Formato monetário <select id="cfMoeda"><option value="BRL">Real (R$) — pt-BR</option><option value="USD">Dólar (US$) — en-US</option><option value="EUR">Euro (€) — de-DE</option></select></label>
-    <label>Formato de data <select id="cfData"><option value="br">DD/MM/AAAA</option><option value="iso">AAAA-MM-DD</option></select></label>
-    <label>Categorias (separadas por vírgula) <input id="cfCat" autocomplete="off"></label>
-    <label class="check"><input type="checkbox" id="cfLembretes"> Mostrar alertas de vencimento no site</label>
-  </div>
-
-  <h2>Dados e privacidade</h2>
-  <div class="actions">
-    <button class="btn ghost" id="exportaTudo" type="button">Exportar meus dados (JSON)</button>
-    <button class="btn danger" id="apagaTudo" type="button">Apagar todos os dados deste navegador</button>
-  </div>
-  <div id="cfMsg" role="status" class="msg"></div>
-  <p class="note">Nesta versão os dados ficam apenas neste navegador e dispositivo (armazenamento local). Não há envio a servidores nem rastreamento.</p>
-</section>
-
-<!-- ============ CONTA ============ -->
-<section id="p-conta" class="page" hidden>
-  <h1>Minha conta</h1>
-  <div class="alert warn" role="note">
-    <b>Versão de demonstração.</b> Nesta edição o site não possui servidor: o cadastro e o “login” são <b>locais</b> e servem apenas para identificar o perfil neste navegador. A autenticação é apenas demonstrativa.
-  </div>
-
-  <div id="contaLogado" hidden>
-    <div class="card">
-      <h2>Você está identificado como <span id="contaNome">—</span></h2>
-      <p class="note">Perfil local neste navegador. Os dados financeiros continuam armazenados apenas aqui.</p>
-      <div class="actions">
-        <button class="btn ghost" id="contaSair" type="button">Sair</button>
-      </div>
-    </div>
-  </div>
-
-  <div id="contaFormularios" class="two">
-    <form id="fCadastro" class="form" novalidate>
-      <h2>Cadastro</h2>
-      <label for="cadNome">Nome <input id="cadNome" required autocomplete="name"></label>
-      <label for="cadEmail">E-mail <input id="cadEmail" type="email" required autocomplete="email"></label>
-      <label for="cadSenha">Senha <span class="hint">(mínimo 6 caracteres)</span> <input id="cadSenha" type="password" minlength="6" required autocomplete="new-password"></label>
-      <div class="actions"><button class="btn" type="submit">Criar perfil local</button></div>
-      <div id="cadMsg" role="alert" class="msg"></div>
-    </form>
-    <form id="fLogin" class="form" novalidate>
-      <h2>Entrar</h2>
-      <label for="logEmail">E-mail <input id="logEmail" type="email" required autocomplete="email"></label>
-      <label for="logSenha">Senha <input id="logSenha" type="password" required autocomplete="current-password"></label>
-      <div class="actions"><button class="btn" type="submit">Entrar</button></div>
-      <div id="logMsg" role="alert" class="msg"></div>
-      <p class="note">A senha é guardada apenas como hash local neste navegador, para fins de demonstração.</p>
-    </form>
-  </div>
-</section>
-
-<!-- ============ CONTATO ============ -->
-<section id="p-contato" class="page" hidden>
-  <h1>Contato e informações institucionais</h1>
-  <div class="two">
-    <div>
-      <p class="lead">A Resoluta AGI oferece apoio à organização financeira, precificação, planejamento e melhoria de processos para microempreendedores e pequenos negócios.</p>
-      <ul class="info-list">
-        <li><span class="ico" aria-hidden="true">◎</span> <b>Localização:</b> São Luís–MA, Brasil</li>
-        <li><span class="ico" aria-hidden="true">☎</span> <b>DDD:</b> (98)</li>
-        <li><span class="ico" aria-hidden="true">◐</span> <b>Instagram:</b> <a href="https://www.instagram.com/resoluta.agi" target="_blank" rel="noopener">@resoluta.agi</a></li>
-      </ul>
-      <p class="note">[PREENCHER antes de publicar: telefone completo, e-mail e endereço oficial. Utilize apenas canais efetivamente configurados.]</p>
-    </div>
-    <form id="fContato" class="form" novalidate>
-      <h2>Envie uma mensagem</h2>
-      <label for="ctNome">Nome <input id="ctNome" required autocomplete="name"></label>
-      <label for="ctEmail">E-mail <input id="ctEmail" type="email" required autocomplete="email"></label>
-      <label for="ctAssunto">Assunto <input id="ctAssunto" autocomplete="off"></label>
-      <label for="ctMensagem">Mensagem <input id="ctMensagem" required autocomplete="off"></label>
-      <div class="actions"><button class="btn" type="submit">Enviar</button></div>
-      <div id="ctMsg" role="alert" class="msg"></div>
-      <p class="note">Sem back-end configurado, o envio abre o seu aplicativo de e-mail com a mensagem preenchida.</p>
-    </form>
-  </div>
-</section>
-
-<!-- ============ PRIVACIDADE ============ -->
-<section id="p-privacidade" class="page legal" hidden>
-  <h1>Política de Privacidade</h1>
-  <p class="note">[Modelo a revisar por profissional jurídico antes da publicação. Preencher: controlador, CNPJ, endereço e canal do encarregado de dados.]</p>
-  <h2>Quais dados são coletados</h2>
-  <p>Nesta versão, o site <b>não envia dados a servidores</b>. Os lançamentos, produtos, metas, preferências e o perfil local ficam no armazenamento local (localStorage) do seu navegador. Não coletamos informações de navegação nem cookies de terceiros.</p>
-  <h2>Finalidades e bases legais</h2>
-  <p>Os dados são usados exclusivamente para o funcionamento das ferramentas que você utiliza. A base legal aplicável é o seu consentimento e a execução do serviço solicitado, conforme a legislação aplicável.</p>
-  <h2>Como os dados são armazenados e protegidos</h2>
-  <p>Os dados permanecem no seu dispositivo. Recomendamos exportar cópias de segurança em <a href="#config">Configurações</a>. Limpar os dados do navegador também os remove.</p>
-  <h2>Serviços externos</h2>
-  <p>Não há integração com serviços externos que recebam seus dados nesta versão. Caso isso mude, você será informado e poderá consentir antes.</p>
-  <h2>Retenção e direitos</h2>
-  <p>Os dados permanecem no dispositivo até você apagá-los. Direitos previstos na LGPD (acesso, correção, portabilidade, exclusão) podem ser exercidos pelo canal de contato a definir.</p>
-</section>
-
-<!-- ============ COOKIES ============ -->
-<section id="p-cookies" class="page legal" hidden>
-  <h1>Política de Cookies</h1>
-  <p>O site usa apenas armazenamento local <b>estritamente necessário</b> ao funcionamento: seus dados financeiros, preferências de aparência e a escolha feita no aviso de cookies. Não usamos rastreadores para publicidade.</p>
-  <h2>Categorias utilizadas</h2>
-  <ul class="ticks">
-    <li><b>Necessários:</b> guardam seus dados e preferências para o site funcionar.</li>
-    <li><b>Opcionais:</b> não são utilizados nesta versão.</li>
-  </ul>
-  <p>Você pode revisar sua escolha a qualquer momento limpando os dados em <a href="#config">Configurações</a>. Caso passemos a usar tecnologias opcionais, pediremos seu consentimento antes de ativá-las.</p>
-</section>
-
-<!-- ============ TERMOS ============ -->
-<section id="p-termos" class="page legal" hidden>
-  <h1>Termos de Uso</h1>
-  <p class="note">[Modelo a revisar por profissional jurídico antes da publicação.]</p>
-  <h2>Condições de utilização</h2>
-  <p>As calculadoras e relatórios são ferramentas de apoio gerencial e fornecem <b>estimativas</b>, sem garantia de lucro ou resultado, e não substituem orientação contábil, jurídica ou financeira profissional.</p>
-  <h2>Responsabilidades do usuário</h2>
-  <p>Você é responsável pelos dados que registra e por manter cópias de segurança (exportação). Não utilize o site para finalidades ilícitas.</p>
-  <h2>Contas e dados</h2>
-  <p>Nesta versão, o perfil é local e de demonstração, com proteção limitada. Não registre informações sensíveis.</p>
-  <h2>Disponibilidade e atendimento</h2>
-  <p>O serviço é oferecido no estado em que se encontra, sem garantia de disponibilidade contínua. O atendimento ocorre pelos canais informados em <a href="#contato">Contato</a>.</p>
-</section>
-
-</main>
-
-<footer>
-  <div class="foot-grid">
-    <div>
-      <p class="foot-brand">Resoluta <b>AGI</b></p>
-      <p class="note">Administração, Gestão e Inovação · São Luís–MA</p>
-      <p class="note">Entenda seus números. Tome melhores decisões.</p>
-    </div>
-    <nav aria-label="Mapa do site">
-      <p class="foot-title">Ferramentas</p>
-      <a href="#painel">Painel</a><a href="#calculadora">Calculadora</a><a href="#produtos">Produtos</a><a href="#lancamentos">Lançamentos</a><a href="#fluxo">Fluxo de caixa</a><a href="#relatorios">Relatórios</a>
-    </nav>
-    <nav aria-label="Institucional">
-      <p class="foot-title">Institucional</p>
-      <a href="#sobre">Sobre</a><a href="#aprenda">Aprenda</a><a href="#contato">Contato</a><a href="#config">Configurações</a>
-    </nav>
-    <nav aria-label="Legal">
-      <p class="foot-title">Legal</p>
-      <a href="#privacidade">Privacidade</a><a href="#cookies">Cookies</a><a href="#termos">Termos de uso</a>
-      <a href="https://www.instagram.com/resoluta.agi" target="_blank" rel="noopener">@resoluta.agi</a>
-    </nav>
-  </div>
-  <p class="foot-copy">© Resoluta AGI · São Luís–MA · <a href="https://www.instagram.com/resoluta.agi" target="_blank" rel="noopener">@resoluta.agi</a></p>
-</footer>
-
-<datalist id="listaCategorias"></datalist>
-<datalist id="listaFormas">
-  <option value="Dinheiro"><option value="Pix"><option value="Cartão de débito"><option value="Cartão de crédito"><option value="Boleto"><option value="Transferência">
-</datalist>
-<datalist id="listaProdutos"></datalist>
-
-<div id="cookie" class="cookie" role="dialog" aria-modal="false" aria-label="Aviso de cookies" hidden>
-  <p>Usamos somente armazenamento local necessário ao funcionamento do site. Não há rastreamento. <a href="#cookies">Saiba mais</a></p>
-  <div class="actions">
-    <button class="btn" id="cookieOk" type="button">Entendi</button>
-    <button class="btn ghost" id="cookieNao" type="button">Rejeitar opcionais</button>
-  </div>
-</div>
-<div id="toast" class="toast" role="status" aria-live="polite"></div>
-<script src="script.js"></script>
-</body>
+    <script src="js/script.js"></script>
+  </body>
 </html>
