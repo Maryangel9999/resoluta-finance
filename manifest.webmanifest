@@ -1,0 +1,74 @@
+{
+  "name": "Resoluta Finance — Gestão e Inteligência Financeira",
+  "short_name": "Resoluta Finance",
+  "description": "Entenda seus números. Tome melhores decisões. Gestão financeira, precificação (markup), fluxo de caixa, contas a pagar/receber e planejamento para microempreendedores, autônomos e pequenos negócios. Uma solução Resoluta AGI.",
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
+  "orientation": "any",
+  "background_color": "#fbf6ef",
+  "theme_color": "#7a1f3d",
+  "categories": ["finance", "business", "productivity", "education"],
+  "icons": [
+    {
+      "src": "icons/favicon-16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/favicon-32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icons/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Calculadora de Markup",
+      "short_name": "Markup",
+      "description": "Calcule o preço de venda a partir do custo e das margens.",
+      "url": "./index.html#/app/calculadora",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "Painel financeiro",
+      "short_name": "Painel",
+      "description": "Veja seus indicadores e gráficos.",
+      "url": "./index.html#/app/painel",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "Fluxo de caixa",
+      "short_name": "Fluxo",
+      "description": "Acompanhe entradas e saídas por mês.",
+      "url": "./index.html#/app/fluxo",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    }
+  ]
+}
