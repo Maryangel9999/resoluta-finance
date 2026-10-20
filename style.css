@@ -174,39 +174,44 @@ main{max-width:1160px;margin:0 auto;padding:1.8rem 1.3rem 3rem;min-height:72vh}
 .pricing-home{
   display:grid;
   grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
-  gap:1rem;
+  gap:1.1rem;
   margin-top:1rem;
 }
 .plan-card-home{
   background:var(--card);
   border:1px solid var(--borda);
+  border-top:4px solid var(--ouro);
   border-radius:var(--raio);
-  padding:1.3rem;
+  padding:1.3rem 1.2rem;
   box-shadow:var(--sombra);
 }
 .plan-card-home.featured{
   border-color:var(--ouro);
   box-shadow:var(--sombra-forte);
-  transform:translateY(-2px);
 }
 .plan-badge{
   display:inline-block;
-  background:#f5ebd7;
+  background:rgba(201,162,74,.18);
   color:var(--vinho);
   font-weight:700;
   padding:.28rem .7rem;
   border-radius:999px;
   font-size:.78rem;
-  margin-bottom:.75rem;
+  margin-bottom:.8rem;
+}
+.plan-card-home h3{
+  margin:0;
+  color:var(--vinho);
 }
 .plan-price{
-  font-size:1.6rem;
-  font-weight:700;
+  font-size:1.7rem;
+  font-weight:800;
+  line-height:1.2;
   color:var(--vinho);
-  margin:.5rem 0 1rem;
+  margin:.7rem 0 1rem;
 }
-.plan-card-home .btn{margin-top:.5rem}
-.plan-card-home .ticks li{padding-left:1.2rem}
+.plan-card-home .ticks{margin-top:.8rem}
+.plan-card-home .btn{margin-top:.75rem}
 
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:.4rem;
