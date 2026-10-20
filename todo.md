@@ -70,4 +70,4 @@
 - [x] Testar acessibilidade (tema, contraste, fonte, leitura, movimento, leitura em voz alta)
 - [x] Verificar ausência de erros no console em todas as rotas
 - [x] Verificar PWA (manifest válido + service worker registrado)
-- [ ] Commit + push em branch de feature + PR
+- [x] Commit + push em branch de feature + PR (PR #3: https://github.com/Maryangel9999/resoluta-finance/pull/3)
